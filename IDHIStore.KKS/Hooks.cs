@@ -31,7 +31,7 @@ namespace IDHIPlugins
             {
                 _hookInstance = Harmony.CreateAndPatchAll(typeof(Hooks), nameof(Hooks));
 
-                _hookInstance.Patch(
+                /*_hookInstance.Patch(
                     AccessTools.Method(
                         Type.GetType("HSceneProc, Assembly-CSharp"),
                             nameof(HSceneProc.GetCloseCategory)),
@@ -44,10 +44,16 @@ namespace IDHIPlugins
                             nameof(HSceneProc.LoadAddTaii),
                             new Type[] { typeof(List<AddTaiiData.Param>) }),
                         postfix: new HarmonyMethod(typeof(Hooks),
-                            nameof(LoadAddTaiiPostfix)));
+                            nameof(LoadAddTaiiPostfix)));*/
 
             }
 
+            /// <summary>
+            /// Add animations for special action points like in FreeH
+            /// </summary>
+            /// <param name="__instance"></param>
+            [HarmonyPostfix]
+            [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.GetCloseCategory))]
             static private void GetCloseCategoryPostfix(object __instance)
             {
                 var _hLevel = Store.GetHLevel();
@@ -105,7 +111,6 @@ namespace IDHIPlugins
                 Log.Warning($"XXXX: [GetCloseCategoryPostfix] reading: h/common/{stringBuilder}"
                     + $"{map.no}");
 
-                //List<GameObject> gameObjectList =
                 var gameObjectList =
                     GlobalMethod.LoadAllFolder<GameObject>("h/common/",
                         stringBuilder.ToString() + map.no.ToString());
@@ -115,19 +120,13 @@ namespace IDHIPlugins
                     return;
                 }
 
-                //HPointData[] componentsInChildren = gameObjectList[gameObjectList.Count - 1]
                 var componentsInChildren = gameObjectList[gameObjectList.Count - 1]
                     .GetComponentsInChildren<HPointData>(true);
-                //HPointOmitObject component = gameObjectList[gameObjectList.Count - 1]
                 var component = gameObjectList[gameObjectList.Count - 1]
                     .GetComponent<HPointOmitObject>();
-                // bool flagAdditionalPosesRange1 = lstInitCategory.Any(c => c == 12 || c >= 1000);
                 var flagAdditionalPosesRange1 = lstInitCategory.Any(c => c == 12 || c >= 1000);
-                // bool flag3PRange2 = lstInitCategory.Any(c => c >= 3000 && c < 4000);
                 var flag3PRange2 = lstInitCategory.Any(c => c >= 3000 && c < 4000);
-                //float num = flags.HpointSearch * flags.HpointSearch;
                 var num = flags.HpointSearch * flags.HpointSearch;
-                // HPointData[] hpointDataArray = componentsInChildren;
                 var hpointDataArray = componentsInChildren;
 
                 for (var index1 = 0; index1 < hpointDataArray.Length; ++index1)
@@ -137,7 +136,6 @@ namespace IDHIPlugins
 
                 var msg = new StringBuilder();
 
-                //foreach (HPointData hpointData in componentsInChildren)
                 foreach (var hpointData in componentsInChildren)
                 {
                     msg.Clear();
@@ -172,6 +170,14 @@ namespace IDHIPlugins
             }
 
 
+            /// <summary>
+            /// Systematically clearing items in dicExpAddTaii made animations available 
+            /// disregarding heroine experience
+            /// </summary>
+            /// <param name="__instance"></param>
+            /// <param name="param"></param>
+            [HarmonyPostfix]
+            [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.LoadAddTaii), new Type[] { typeof(List<AddTaiiData.Param>) })]
             static private void LoadAddTaiiPostfix(object __instance, List<AddTaiiData.Param> param)
             {
                 var hsceneTraverse = Traverse.Create(__instance);
@@ -221,36 +227,6 @@ namespace IDHIPlugins
                     else
                     {
                         item.Value.Clear();
-                    }
-                }
-            }
-
-            static private void LoadAddTaiiReference(object __instance, List<AddTaiiData.Param> param)
-            {
-                var hsceneTraverse = Traverse.Create(__instance);
-                var dicExpAddTaii = hsceneTraverse
-                    .Field<Dictionary<int, Dictionary<int, int>>>("dicExpAddTaii").Value;
-
-                foreach (var obj in param)
-                {
-                    var hExp = obj.hExp;
-                    foreach (var info in obj.info)
-                    {
-                        if (!dicExpAddTaii.ContainsKey(info.taii))
-                        {
-                            dicExpAddTaii.Add(info.taii, new Dictionary<int, int>());
-                        }
-                        foreach (var id in info.Ids)
-                        {
-                            if (!dicExpAddTaii[info.taii].ContainsKey(id))
-                            {
-                                dicExpAddTaii[info.taii].Add(id, hExp);
-                            }
-                            else
-                            {
-                                dicExpAddTaii[info.taii][id] = hExp;
-                            }
-                        }
                     }
                 }
             }
@@ -331,20 +307,218 @@ namespace IDHIPlugins
                 return _experience == 0
                     || (_experience == 1 && hexperience > SaveData.Heroine.HExperienceKind.不慣れ);
             }
+
+            #region Reference code
+            private static void GetCloseCategoryPostfixFirstPoc(object __instance)
+            {
+                var hsceneTraverse = Traverse.Create(__instance);
+                var lines = new StringBuilder();
+
+                var flags = hsceneTraverse
+                    .Field<HFlag>("flags").Value;
+                var lstInitCategory = hsceneTraverse
+                    .Field<List<int>>("lstInitCategory").Value;
+                var categorys = hsceneTraverse
+                    .Field<List<int>>("categorys").Value;
+                var map = hsceneTraverse
+                    .Field<ActionMap>("map").Value;
+                var nowHpointData = hsceneTraverse
+                    .Field<string>("nowHpointData").Value;
+                var HpointJudgePos = hsceneTraverse
+                    .Field<Vector3>("HpointJudgePos").Value;
+                var closeHpointDataGA = hsceneTraverse
+                    .Field<List<HPointData>>("closeHpointData").Value;
+                var useCategorysGA = hsceneTraverse
+                    .Field<List<int>>("useCategorys").Value;
+
+                var useCategorys = new List<int>();
+                var closeHpointData = new List<HPointData>();
+
+                closeHpointData.Clear();
+                foreach (var e in closeHpointDataGA)
+                {
+                    closeHpointData.Add(e);
+                }
+
+                useCategorys.Clear();
+                useCategorys.AddRange(categorys);
+
+                Log.Warning($"XXXX: [GetCloseCategoryPostfix] start useCategorys={Utilities.CategoryList(useCategorys, true, false)}\n");
+
+                StringBuilder stringBuilder = new("HPoint_");
+
+                if (categorys.Any(c => c >= 1010 && c < 1200))
+                {
+                    Log.Warning($"XXXX: [GetCloseCategoryPostfix] one stringBuilder.Append(Add_)");
+                }
+
+                if (categorys.Any(c => c >= 1010 && c < 1100)
+                    || categorys.Any(c => c >= 1100 && c < 1200))
+                {
+                    stringBuilder.Append("Add_");
+                    Log.Warning($"XXXX: [GetCloseCategoryPostfix] two stringBuilder.Append(Add_)");
+                }
+                else if (categorys.Any(
+                    c => c >= 3000 && c < 4000))
+                {
+                    stringBuilder.Append("3P_");
+                    Log.Warning($"XXXX: [GetCloseCategoryPostfix] two stringBuilder.Append(3P_)");
+                }
+
+                string str1 = stringBuilder.ToString();
+                int index1 = map.no;
+                string str2 = index1.ToString();
+                List<GameObject> gameObjectList =
+                    GlobalMethod.LoadAllFolder<GameObject>("h/common/",
+                        stringBuilder.ToString() + map.no.ToString());
+
+                if (gameObjectList == null || gameObjectList.Count == 0)
+                {
+                    return;
+                }
+
+                HPointData[] componentsInChildren = gameObjectList[gameObjectList.Count - 1]
+                    .GetComponentsInChildren<HPointData>(true);
+                HPointOmitObject component = gameObjectList[gameObjectList.Count - 1]
+                    .GetComponent<HPointOmitObject>();
+                bool flagLovePointRange1 = lstInitCategory.Any(c => c == 12 || c >= 1000);
+                bool flag3PRange2 = lstInitCategory.Any(c => c >= 3000 && c < 4000);
+                float num = flags.HpointSearch * flags.HpointSearch;
+                HPointData[] hpointDataArray = componentsInChildren;
+
+                for (index1 = 0; index1 < hpointDataArray.Length; ++index1)
+                {
+                    hpointDataArray[index1].BackUpPosition();
+                }
+
+                var msg = new StringBuilder();
+
+                foreach (HPointData hpointData in componentsInChildren)
+                {
+                    msg.Clear();
+                    if (!component.list.Contains(hpointData.gameObject))
+                    {
+                        //if ((flags.isFreeH) || TestMode.Value)
+                        if (flags.isFreeH)
+                        {
+                            if (!hpointData.category.Any((int c)
+                                    => MathfEx.IsRange(2000, c, 2999, true))
+                                && IsCategoryInAnimationList(hsceneTraverse, hpointData.category)
+                                && IsExperience(hsceneTraverse, hpointData.Experience))
+                            {
+                                msg.Append("Add in freeH");
+                                SetCategoryXX(
+                                    hsceneTraverse,
+                                    hpointData,
+                                    ref useCategorys,
+                                    false,
+                                    msg.ToString());
+                                if (nowHpointData == null || !(hpointData.name == nowHpointData))
+                                {
+                                    closeHpointData.Add(hpointData);
+                                }
+                            }
+                        }
+                        else if (flagLovePointRange1)
+                        {
+                            bool flagRange3;
+                            if (flag3PRange2)
+                            {
+                                flagRange3 = hpointData.category.Any((int c) => c >= 3000 && c < 4000);
+                                msg.Append("3P ");
+                            }
+                            else
+                            {
+                                flagRange3 = hpointData.category
+                                    .Any((int c) =>
+                                        (c == 12 || c >= 1000) && lstInitCategory.Contains(c));
+                                msg.Append("LovePoint ");
+                            }
+                            if (flagRange3 && IsExperience(hsceneTraverse, hpointData.Experience))
+                            {
+                                float sqrMagnitude =
+                                    (hpointData.transform.position - HpointJudgePos).sqrMagnitude;
+                                if (!flags.HpointSearchLimit || sqrMagnitude <= num)
+                                {
+                                    msg.Append("Add in flagRange3+IsExperience");
+                                    SetCategoryXX(
+                                        hsceneTraverse,
+                                        hpointData,
+                                        ref useCategorys,
+                                        true,
+                                        msg.ToString());
+                                    if (nowHpointData == null
+                                        || !(hpointData.name == nowHpointData))
+                                    {
+                                        closeHpointData.Add(hpointData);
+                                    }
+                                }
+                            }
+                        }
+                        else if (!hpointData.category.Any((int c) => c == 12 || c >= 1000)
+                            && IsExperience(hsceneTraverse, hpointData.Experience))
+                        {
+                            float sqrMagnitude =
+                                (hpointData.transform.position - HpointJudgePos).sqrMagnitude;
+                            if (!flags.HpointSearchLimit || sqrMagnitude <= num)
+                            {
+                                msg.Append("Add in Last Chance");
+                                SetCategoryXX(
+                                    hsceneTraverse,
+                                    hpointData,
+                                    ref useCategorys,
+                                    false,
+                                    msg.ToString());
+                                if (nowHpointData == null || !(hpointData.name == nowHpointData))
+                                {
+                                    closeHpointData.Add(hpointData);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Log.Warning($"XXXX: categorys={Utilities.CategoryList(categorys, true, false)}\n" +
+                    $"useCategorysGA={Utilities.CategoryList(useCategorysGA, true, false)}\n" +
+                    $"useCategorys={Utilities.CategoryList(useCategorys, true, false)}\n");
+
+                //if (!this.useInitPosPoint)
+                //    return;
+                //this.closeInitPoint = false;
+            }
+
+            static private void LoadAddTaiiReference(object __instance, List<AddTaiiData.Param> param)
+            {
+                var hsceneTraverse = Traverse.Create(__instance);
+                var dicExpAddTaii = hsceneTraverse
+                    .Field<Dictionary<int, Dictionary<int, int>>>("dicExpAddTaii").Value;
+
+                foreach (var obj in param)
+                {
+                    var hExp = obj.hExp;
+                    foreach (var info in obj.info)
+                    {
+                        if (!dicExpAddTaii.ContainsKey(info.taii))
+                        {
+                            dicExpAddTaii.Add(info.taii, new Dictionary<int, int>());
+                        }
+                        foreach (var id in info.Ids)
+                        {
+                            if (!dicExpAddTaii[info.taii].ContainsKey(id))
+                            {
+                                dicExpAddTaii[info.taii].Add(id, hExp);
+                            }
+                            else
+                            {
+                                dicExpAddTaii[info.taii][id] = hExp;
+                            }
+                        }
+                    }
+                }
+            }
+
+            #endregion
+
         }
     }
 }
-
-/*using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IDHIStore.KKS
-{
-    public class Class1
-    {
-    }
-}
-*/
