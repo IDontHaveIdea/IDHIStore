@@ -12,6 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\hlevel_item.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\hlevel_item.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
