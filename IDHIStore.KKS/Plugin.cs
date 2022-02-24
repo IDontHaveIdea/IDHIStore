@@ -25,13 +25,20 @@ namespace IDHIPlugins
         private void Awake()
         {
             Log.SetLogSource(base.Logger);
-
+            Log.Enabled = true;
         }
 
         private void Start()
         {
-            Hooks.Init();
+            Log.Warning($"XXXX: [IDHIStore] Start Called.");
 
+            if (KoikatuAPI.GetCurrentGameMode() != GameMode.MainGame)
+            {
+                return;
+            }
+
+            Hooks.Init();
+            Store.Init();
         }
         #endregion
     }

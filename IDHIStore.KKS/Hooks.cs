@@ -50,11 +50,6 @@ namespace IDHIPlugins
 
             static private void GetCloseCategoryPostfix(object __instance)
             {
-                if (KoikatuAPI.GetCurrentGameMode() != GameMode.MainGame)
-                {
-                    return;
-                }
-
                 var _hLevel = Store.GetHLevel();
 
                 if (_hLevel > 2)
