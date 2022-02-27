@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 
+using IDHIPlugins;
 using IDHIUtils;
 
 #region Assembly attributes
@@ -8,10 +9,11 @@ using IDHIUtils;
  * These attributes define various meta-information of the generated DLL.
  * In general, you don't need to touch these. Instead, edit the values in Info.
  */
-[assembly: AssemblyTitle(Constants.Prefix + "_" + PInfo.PluginName + " (" + PInfo.GUID + ")")]
-[assembly: AssemblyProduct(Constants.Prefix + "_" + PInfo.PluginName)]
-[assembly: AssemblyVersion(PInfo.Version)]
-[assembly: AssemblyFileVersion(PInfo.Version)]
+[assembly: AssemblyTitle(Constants.Prefix + "_" + IDHIStoreItems.PluginName 
+    + " (" + IDHIStoreItems.GUID + ")")]
+[assembly: AssemblyProduct(Constants.Prefix + "_" + IDHIStoreItems.PluginName)]
+[assembly: AssemblyVersion(IDHIStoreItems.Version)]
+[assembly: AssemblyFileVersion(IDHIStoreItems.Version)]
 
 #endregion Assembly attributes
 
@@ -22,10 +24,10 @@ using IDHIUtils;
 
 namespace IDHIPlugins
 {
-    public struct PInfo
+    public partial class IDHIStoreItems
     {
         public const string GUID = "com.ihavenoidea.idhistore";
-        public const string Version = "0.0.1.0";
+        public const string Version = "0.0.9.0";
 #if DEBUG
         public const string PluginDisplayName = "IDHI Store Items (Debug)";
 #else

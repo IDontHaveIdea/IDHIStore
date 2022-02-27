@@ -10,33 +10,27 @@ using IDHIUtils;
 namespace IDHIPlugins
 {
     /// <summary>
+    /// KKS Store plug-in that will make available the animations regardless of heroine experience
     /// </summary>
-    /// <remarks>
-    ///
-    ///
-    /// </remarks>
     [BepInDependency(KoikatuAPI.GUID, KoikatuAPI.VersionConst)]
-    [BepInDependency(IDHIUtils.PInfo.GUID, IDHIUtils.PInfo.Version)]
-    [BepInPlugin(PInfo.GUID, PInfo.PluginDisplayName, PInfo.Version)]
+    [BepInDependency(Utilities.GUID, Utilities.Version)]
+    [BepInPlugin(GUID, PluginDisplayName, Version)]
     [BepInProcess(KoikatuAPI.GameProcessName)]
-    public partial class IDHIStore : BaseUnityPlugin
+    public partial class IDHIStoreItems : BaseUnityPlugin
     {
+        static internal Logg _log = new();
+
         #region Unity methods
         private void Awake()
         {
-            Log.SetLogSource(base.Logger);
-            Log.Enabled = true;
+            _log.SetLogSource(base.Logger);
+#if DEBUG
+            _log.Enabled = true;
+#endif
         }
 
         private void Start()
         {
-            Log.Warning($"XXXX: [IDHIStore] Start Called.");
-
-            if (KoikatuAPI.GetCurrentGameMode() != GameMode.MainGame)
-            {
-                return;
-            }
-
             Hooks.Init();
             Store.Init();
         }

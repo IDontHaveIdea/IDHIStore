@@ -8,9 +8,11 @@ using KKAPI.Utilities;
 
 namespace IDHIPlugins
 {
-    public partial class IDHIStore
+    public partial class IDHIStoreItems
     {
         public const int StoreItemId = 4194304; // 2^22
+        internal const int _stock = 3;
+        internal const int _cost = 300;
 
         internal class Store
         {
@@ -18,7 +20,7 @@ namespace IDHIPlugins
             {
                 var icon = ResourceUtils.GetEmbeddedResource(
                     "hlevel_item.png", 
-                    typeof(IDHIStore).Assembly).LoadTexture();
+                    typeof(IDHIStoreItems).Assembly).LoadTexture();
                 var helvelCategoryId = StoreApi.RegisterShopItemCategory(icon);
 
                 StoreApi.RegisterShopItem(
@@ -34,9 +36,9 @@ namespace IDHIPlugins
 #endif
                     itemBackground: StoreApi.ShopBackground.Pink,
                     itemCategory: helvelCategoryId,
-                    stock: 3, 
-                    resetsDaily: false, 
-                    cost: 200,
+                    stock: _stock, 
+                    resetsDaily: true, 
+                    cost: _cost,
                     numText: "{0} available upgrades");
             }
 
