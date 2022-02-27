@@ -5,4 +5,10 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Need for patch to load", Scope = "member", Target = "~M:IDHIPlugins.IDHIStore.Hooks.LoadAddTaiiPostfix(System.Object,System.Collections.Generic.List{AddTaiiData.Param})")]
+
+[assembly: SuppressMessage(
+    "Style",
+    "IDE0060:Remove unused parameter",
+    Justification = "Needed for patch to load",
+    Scope = "member",
+    Target = "~M:IDHIPlugins.IDHIStoreItems.Hooks.LoadAddTaiiPostfix(System.Object,System.Collections.Generic.List{AddTaiiData.Param})")]
