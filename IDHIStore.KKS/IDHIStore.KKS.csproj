@@ -6,7 +6,7 @@
 
   <PropertyGroup>
     <ProjectGuid>dc735533-276c-41b7-a882-77210c45cff1</ProjectGuid>
-    <RootNamespace>IDHIStore</RootNamespace>
+    <RootNamespace>IDHIPlugins</RootNamespace>
     <AssemblyName>KKS_$(MSBuildProjectName.Replace(".KKS", ""))</AssemblyName>
     <Nullable>warnings</Nullable>
   </PropertyGroup>
