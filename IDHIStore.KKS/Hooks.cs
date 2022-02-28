@@ -36,15 +36,22 @@ namespace IDHIPlugins
             /// <param name="__instance"></param>
             [HarmonyPostfix]
             [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.GetCloseCategory))]
-            static private void GetCloseCategoryPostfix(object __instance)
+            static private void AddToCategoryListPostfix(object __instance)
             {
                 var hsceneTraverse = Traverse.Create(__instance);
                 var flags = hsceneTraverse
                     .Field<HFlag>("flags").Value;
+                var categorys = hsceneTraverse.Field<List<int>>("categorys").Value;
 
                 if (flags.isFreeH)
                 {
                     _log.Debug($"0001: Disabling in Free-H");
+                    return;
+                }
+
+                if ((categorys[0] == 12) || (categorys[0] >= 1000))
+                {
+                    _log.Debug($"0001: Disabling is a special H point.");
                     return;
                 }
 
@@ -67,8 +74,6 @@ namespace IDHIPlugins
                 var lines = new StringBuilder();
                 var lstInitCategory = hsceneTraverse
                     .Field<List<int>>("lstInitCategory").Value;
-                var categorys = hsceneTraverse
-                    .Field<List<int>>("categorys").Value;
                 var map = hsceneTraverse
                     .Field<ActionMap>("map").Value;
                 var nowHpointData = hsceneTraverse
@@ -162,8 +167,14 @@ namespace IDHIPlugins
                 var hsceneTraverse = Traverse.Create(__instance);
                 var flags = hsceneTraverse
                     .Field<HFlag>("flags").Value;
+                var categorys = hsceneTraverse.Field<List<int>>("categorys").Value;
 
                 if (flags.isFreeH)
+                {
+                    return;
+                }
+
+                if ((categorys[0] == 12) || (categorys[0] >= 1000))
                 {
                     return;
                 }
@@ -216,7 +227,7 @@ namespace IDHIPlugins
 
             [HarmonyPostfix]
             [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.CreateListAnimationFileName))]
-            static public void CreateListAnimationFileNamePostfix(
+            static public void ExtendUseAnimInfoPostfix(
                 object __instance, bool _isAnimListCreate = true)
             {
                 var hsceneTraverse = Traverse.Create(__instance);
