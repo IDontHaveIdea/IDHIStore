@@ -11,7 +11,7 @@ namespace IDHIPlugins
     public partial class IDHIStoreItems
     {
         public const int StoreItemId = 4194304; // 2^22
-        internal const int _stock = 3;
+        internal const int _stock = 4;
         internal const int _cost = 300;
 
         internal class Store
@@ -26,9 +26,9 @@ namespace IDHIPlugins
                 StoreApi.RegisterShopItem(
                     itemId: StoreItemId, 
                     itemName: "H Experience Levels", 
-                    explaination:"Gives access to H poses independent of heroine experience"
-                        + " there are three levels.  Firs level for experience 50 second for " 
-                        + "experience 100 and third (sorry no more space)",
+                    explaination:"Gives access to H poses independent of heroine experience there are " 
+                        + "three levels.  Firs level for experience 50 second for experience " 
+                        + "100 and third (sorry no more space)",
 #if DEBUG
                     shopType: StoreApi.ShopType.Normal,
 #else

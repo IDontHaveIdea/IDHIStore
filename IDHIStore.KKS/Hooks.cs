@@ -31,118 +31,6 @@ namespace IDHIPlugins
             }
 
             /// <summary>
-            /// Add some special animations to other maps adjusting categories
-            /// </summary>
-            /// <param name="__instance"></param>
-            [HarmonyPostfix]
-            [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.CreateAllAnimationList))]
-            static public void AddAnimationsPostfix(object __instance)
-            {
-                var hsceneTraverse = Traverse.Create(__instance);
-                var flags = hsceneTraverse
-                    .Field<HFlag>("flags").Value;
-                var categorys = hsceneTraverse.Field<List<int>>("categorys").Value;
-
-                if (flags.isFreeH)
-                {
-                    return;
-                }
-
-                if ((categorys[0] == 12) || (categorys[0] >= 1000))
-                {
-                    return;
-                }
-
-                var _hLevel = Store.GetHLevel();
-
-                if (_hLevel < 3)
-                {
-                    return;
-                }
-
-                var addedAnimations = new StringBuilder();
-                var lstAnimInfo = hsceneTraverse
-                    .Field<List<HSceneProc.AnimationListInfo>[]>("lstAnimInfo").Value;
-                var useCategorys = hsceneTraverse.Field<List<int>>("useCategorys").Value;
-
-                // Loop through aibu, houshi and sonyu
-                for (var mode = 0; mode < 3; mode++)
-                {
-                    foreach (var anim in lstAnimInfo[mode].Where(x
-                        => x.lstCategory.Any(c
-                            => (c.category == 12) || (c.category >= 1000 && c.category < 1999))))
-                    {
-                        if (anim.lstCategory.Any(c => useCategorys.Contains(c.category)))
-                        {
-                            continue;
-                        }
-
-                        var category = anim.lstCategory[0].category;
-                        switch (category)
-                        {
-                            /*
-                             * Need special position only work on certain hpoints
-                             * case 12:
-                                anim.lstCategory.Add(new HSceneProc.Category
-                                {
-                                    category = (int)PositionCategory.SofaBench,
-                                });
-                                break;*/
-                            case 1002:
-                                // Bookshelf Caress
-                                anim.nameAnimation = "壁いたずら愛撫";
-                                anim.lstCategory.Add(new HSceneProc.Category
-                                {
-                                    category = (int)PositionCategory.Wall,
-                                });
-                                break;
-                            case 1304:
-                                // Pressed From Behind
-                                anim.lstCategory.Add(new HSceneProc.Category
-                                {
-                                    category = (int)PositionCategory.Wall,
-                                });
-                                break;
-                            case 1006:
-                                if (anim.id == 21)
-                                {
-                                    // Fence Doggy
-                                    anim.nameAnimation = "壁バック 2";
-                                }
-                                if (anim.id == 22)
-                                {
-                                    // Fence Lifting
-                                    anim.nameAnimation = "壁掴まり駅弁";
-                                }
-                                anim.lstCategory.Add(new HSceneProc.Category
-                                {
-                                    category = (int)PositionCategory.Wall,
-                                });
-                                break;
-                            case 1008:
-                                // Piledriver Missionary
-                                anim.lstCategory.Add(new HSceneProc.Category
-                                {
-                                    category = (int)PositionCategory.SitChair,
-                                });
-                                break;
-                            case 1300:
-                                if (mode == 2)
-                                {
-                                    // Volleyball Net Doggystyle
-                                    anim.nameAnimation = "壁バック 3";
-                                    anim.lstCategory.Add(new HSceneProc.Category
-                                    {
-                                        category = (int)PositionCategory.Wall,
-                                    });
-                                }
-                                break;
-                        }
-                    }
-                }
-            }
-
-            /// <summary>
             /// Add animations for special action points like in Free-H
             /// </summary>
             /// <param name="__instance"></param>
@@ -157,13 +45,13 @@ namespace IDHIPlugins
 
                 if (flags.isFreeH)
                 {
-                    _Log.Debug($"0001: Disabling in Free-H");
+                    _log.Debug($"0001: Disabling in Free-H");
                     return;
                 }
 
                 if ((categorys[0] == 12) || (categorys[0] >= 1000))
                 {
-                    _Log.Debug($"0002: Disabling is a special H point.");
+                    _log.Debug($"0001: Disabling is a special H point.");
                     return;
                 }
 
@@ -171,11 +59,11 @@ namespace IDHIPlugins
 
                 if (_hLevel > 2)
                 {
-                    _Log.Debug($"0003: Level 3 enabled.");
+                    _log.Debug($"0002: Level 3 enabled.");
                 }
                 else
                 {
-                    _Log.Debug($"0004: Level {_hLevel} to low.");
+                    _log.Debug($"0003: Level {_hLevel} to low.");
                     return;
                 }
 
@@ -196,22 +84,22 @@ namespace IDHIPlugins
                     .Field<List<int>>("useCategorys").Value;
                 #endregion
 
-                StringBuilder sbTmp = new("HPoint_");
+                StringBuilder stringBuilder = new("HPoint_");
 
                 if (categorys.Any(c => c >= 1010 && c < 1100)
                     || categorys.Any(c => c >= 1100 && c < 1200))
                 {
-                    sbTmp.Append("Add_");
+                    stringBuilder.Append("Add_");
                 }
                 else if (categorys.Any(
                     c => c >= 3000 && c < 4000))
                 {
-                    sbTmp.Append("3P_");
+                    stringBuilder.Append("3P_");
                 }
 
                 var gameObjectList =
                     GlobalMethod.LoadAllFolder<GameObject>("h/common/",
-                        sbTmp.ToString() + map.no.ToString());
+                        stringBuilder.ToString() + map.no.ToString());
 
                 if (gameObjectList == null || gameObjectList.Count == 0)
                 {
@@ -262,6 +150,8 @@ namespace IDHIPlugins
                         }
                     }
                 }
+                _log.Debug($"0004: categorys={Utilities.CategoryList(categorys, true, false)}\n"
+                    + $"useCategorys={Utilities.CategoryList(useCategorys, true, false)}\n");
             }
 
             /// <summary>
@@ -296,13 +186,13 @@ namespace IDHIPlugins
 
                 if (_hLevel <= 0)
                 {
-                    _Log.Debug("0005: No levels bought yet.");
+                    _log.Debug("0005: No levels bought yet.");
                     return;
                 }
 
                 if (_hLevel < 3)
                 {
-                    _Log.Debug($"0006: Level {_hLevel} enabled.");
+                    _log.Debug($"0006: Level {_hLevel} enabled.");
                 }
 
                 foreach (var item in dicExpAddTaii)
@@ -338,7 +228,7 @@ namespace IDHIPlugins
             [HarmonyPostfix]
             [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.CreateListAnimationFileName))]
             static public void ExtendUseAnimInfoPostfix(
-                object __instance)
+                object __instance, bool _isAnimListCreate = true)
             {
                 var hsceneTraverse = Traverse.Create(__instance);
 
@@ -428,7 +318,7 @@ namespace IDHIPlugins
                         && !useCategorys.Contains(num))
                     {
                         useCategorys.Add(num);
-                        _Log.Debug($"0008: [{msg}] Add category {(PositionCategory)num}");
+                        _log.Debug($"0007: [{msg}] Add category {(PositionCategory)num}");
                     }
                 }
             }
