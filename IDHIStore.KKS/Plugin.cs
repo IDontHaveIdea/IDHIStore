@@ -2,30 +2,34 @@
 // IDHIStore
 //
 using BepInEx;
+using BepInEx.Logging;
 
 using KKAPI;
 
-using IDHIUtils;
+using XUnity.AutoTranslator.Plugin.Core;
 
+using IDHIUtils;
 namespace IDHIPlugins
 {
-    /// <summary>
-    /// KKS Store plug-in that will make available the animations regardless of heroine experience
-    /// </summary>
+/// <summary>
+/// KKS Store plug-in that will make available the animations regardless of heroine experience
+/// </summary>
     [BepInDependency(KoikatuAPI.GUID, KoikatuAPI.VersionConst)]
     [BepInDependency(Utilities.GUID, Utilities.Version)]
     [BepInPlugin(GUID, PluginDisplayName, Version)]
     [BepInProcess(KoikatuAPI.GameProcessName)]
     public partial class IDHIStoreItems : BaseUnityPlugin
     {
-        static internal Logg _log = new();
+        static internal Logg _Log = new();
 
         #region Unity methods
         private void Awake()
         {
-            _log.SetLogSource(base.Logger);
+            _Log.SetLogSource(base.Logger);
+            ConfigEntries();
+            _Log.Enabled = DebugInfo.Value;
 #if DEBUG
-            _log.Enabled = true;
+            _Log.Level(LogLevel.Info, $"0009: Logging set to {_Log.Enabled}");
 #endif
         }
 
