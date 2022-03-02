@@ -2,13 +2,15 @@
 // IDHIStore
 //
 using BepInEx;
+#if DEBUG
 using BepInEx.Logging;
+#endif
 
 using KKAPI;
 
-using XUnity.AutoTranslator.Plugin.Core;
-
 using IDHIUtils;
+
+
 namespace IDHIPlugins
 {
 /// <summary>
