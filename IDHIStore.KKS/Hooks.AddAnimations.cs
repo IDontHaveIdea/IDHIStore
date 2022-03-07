@@ -1,18 +1,15 @@
 ﻿//
 // Hooks for Store - Add animations changing it's context to Category list
 //
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using UnityEngine;
-using H;
 using ActionGame;
 
-using HarmonyLib;
+using H;
 
-using KKAPI;
+using HarmonyLib;
 
 using IDHIUtils;
 
@@ -55,7 +52,30 @@ namespace IDHIPlugins
                         }
                     }
                 },
-                { 23, new Dictionary<int, List<string>>
+                {  7, new Dictionary<int, List<string>>
+                    {
+                        { 12, new List<string>
+                            {
+                                "nagaisu_00 (5)",
+                                "nagaisu_00 (6)",
+                                "nagaisu_00 (7)"
+                            }
+                        }
+                    }
+                },
+                {
+                    17, new Dictionary<int, List<string>>
+                    {
+                        { 12, new List<string>
+                            {
+                                "nagaisu_00",
+                                "nagaisu_00 (1)"
+                            }
+                        }
+                    }
+                },
+                {
+                    23, new Dictionary<int, List<string>>
                     {
                         { 12, new List<string> 
                             {

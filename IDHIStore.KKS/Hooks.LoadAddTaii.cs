@@ -3,18 +3,8 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using UnityEngine;
-using H;
-using ActionGame;
 
 using HarmonyLib;
-
-using KKAPI;
-
-using IDHIUtils;
 
 
 namespace IDHIPlugins
@@ -37,6 +27,8 @@ namespace IDHIPlugins
                 var flags = hsceneTraverse
                     .Field<HFlag>("flags").Value;
                 var categorys = hsceneTraverse.Field<List<int>>("categorys").Value;
+                var dicExpAddTaii = hsceneTraverse
+                    .Field<Dictionary<int, Dictionary<int, int>>>("dicExpAddTaii").Value;
 
                 if (flags.isFreeH)
                 {
@@ -47,9 +39,6 @@ namespace IDHIPlugins
                 {
                     return;
                 }
-
-                var dicExpAddTaii = hsceneTraverse
-                    .Field<Dictionary<int, Dictionary<int, int>>>("dicExpAddTaii").Value;
 
                 var _hLevel = Store.GetHLevel();
 
@@ -64,31 +53,33 @@ namespace IDHIPlugins
                     _Log.Debug($"0006: Level {_hLevel} enabled.");
                 }
 
-                foreach (var item in dicExpAddTaii)
+                var modes = new List<int>(dicExpAddTaii.Keys);
+                foreach (var mode in modes)
                 {
                     if (_dicExpAddTaii != null)
                     {
-                        if (!_dicExpAddTaii.ContainsKey(item.Key))
+                        if (!_dicExpAddTaii.ContainsKey(mode))
                         {
                             // Save the original dictionary
-                            _dicExpAddTaii.Add(item.Key, new Dictionary<int, int>(item.Value));
+                            _dicExpAddTaii.Add(mode, new Dictionary<int, int>(dicExpAddTaii[mode]));
                         }
                     }
                     switch (_hLevel)
                     {
                         case 1:
                             // For first Level clear all 50 sysTaii setting to 0
-                            for (var i = 0; i < item.Value.Count; i++)
+                            var ids = new List<int>(dicExpAddTaii[mode].Keys);
+                            foreach (var id in ids)
                             {
-                                if (item.Value[i] == 50)
+                                if (dicExpAddTaii[mode][id] == 50)
                                 {
-                                    item.Value[i] = 0;
+                                    dicExpAddTaii[mode][id] = 0;
                                 }
                             }
                             break;
                         default:
                             // For level greater than 2 set the entire dictionary to empty
-                            item.Value.Clear();
+                            dicExpAddTaii[mode].Clear();
                             break;
                     }
                 }
