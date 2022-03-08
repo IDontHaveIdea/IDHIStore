@@ -67,7 +67,7 @@ namespace IDHIPlugins
                     switch (_hLevel)
                     {
                         case 1:
-                            // For first Level clear all 50 sysTaii setting to 0
+                            // For first Level clear all 50 sysTaii setting them to 0
                             var ids = new List<int>(dicExpAddTaii[mode].Keys);
                             foreach (var id in ids)
                             {
