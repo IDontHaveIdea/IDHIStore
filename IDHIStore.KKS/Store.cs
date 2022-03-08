@@ -1,7 +1,6 @@
 ﻿//
 // Debug testing
 //
-
 using KKAPI.MainGame;
 using KKAPI.Utilities;
 
@@ -37,7 +36,7 @@ namespace IDHIPlugins
                     itemBackground: StoreApi.ShopBackground.Pink,
                     itemCategory: helvelCategoryId,
                     stock: _stock, 
-                    resetsDaily: true, 
+                    resetsDaily: false, 
                     cost: _cost,
                     numText: "{0} available upgrades");
             }
