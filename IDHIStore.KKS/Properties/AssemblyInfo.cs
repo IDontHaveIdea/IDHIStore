@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("https://github.com/IDontHaveIdea/IDHIStore.git")]
-[assembly: AssemblyCopyright("Copyright ©IllusionMods  2022")]
+[assembly: AssemblyCopyright("Copyright ©IDontHaveIdea  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
