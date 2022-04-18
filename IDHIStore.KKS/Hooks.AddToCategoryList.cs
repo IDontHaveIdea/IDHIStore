@@ -13,7 +13,6 @@ using HarmonyLib;
 using UnityEngine;
 
 
-
 namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
@@ -26,7 +25,7 @@ namespace IDHIPlugins
             /// <param name="__instance"></param>
             [HarmonyPostfix]
             [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.GetCloseCategory))]
-            static private void AddToCategoryListPostfix(object __instance)
+            private static void AddToCategoryListPostfix(object __instance)
             {
                 var hsceneTraverse = Traverse.Create(__instance);
                 var flags = hsceneTraverse
@@ -106,6 +105,8 @@ namespace IDHIPlugins
 
                 var msg = new StringBuilder();
 
+                // Loop through special animations and add any missing
+                // special category to the used category list
                 foreach (var hPointData in componentsInChildren.Where(
                     x => x.category.Any(c => (c == 12) || (c >= 1000 && c < 1999))))
                 {
