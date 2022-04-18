@@ -11,7 +11,7 @@ namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {
-        static internal ConfigEntry<bool> DebugInfo { get; set; }
+        internal static ConfigEntry<bool> DebugInfo { get; set; }
         internal const string DebugSection = "Debug";
 
         internal void ConfigEntries()
@@ -28,7 +28,7 @@ namespace IDHIPlugins
             {
                 _Log.Enabled = DebugInfo.Value;
 #if DEBUG
-                _Log.Level(LogLevel.Info, $"0028: Log.Enabled set to {_Log.Enabled}");
+                _Log.Level(LogLevel.Info, $"0010: Log.Enabled set to {_Log.Enabled}");
 #endif
             };
         }

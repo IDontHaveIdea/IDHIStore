@@ -10,11 +10,11 @@ namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {
-        static internal Dictionary<int, Dictionary<int, int>> _dicExpAddTaii = new();
+        internal static Dictionary<int, Dictionary<int, int>> _dicExpAddTaii = new();
 
         internal partial class Hooks
         {
-            static internal void Init()
+            internal static void Init()
             {
                 _ = Harmony.CreateAndPatchAll(typeof(Hooks));
             }

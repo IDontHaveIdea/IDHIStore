@@ -19,7 +19,7 @@ namespace IDHIPlugins
             /// <param name="__instance">HSceneProc instance</param>
             [HarmonyPostfix]
             [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.CreateListAnimationFileName))]
-            static public void ExtendUseAnimInfoPostfix(
+            public static void ExtendUseAnimInfoPostfix(
                 object __instance)
             {
                 var hsceneTraverse = Traverse.Create(__instance);
