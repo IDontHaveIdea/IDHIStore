@@ -1,5 +1,5 @@
 ﻿//
-// Debug testing
+// Register item in store
 //
 using KKAPI.MainGame;
 using KKAPI.Utilities;
@@ -11,11 +11,14 @@ namespace IDHIPlugins
     {
         public const int StoreItemId = 4194304; // 2^22
         internal const int _stock = 3;
-        internal const int _cost = 300;
+        internal const int _cost = 200;
 
         internal class Store
         {
-            static internal void Init()
+            /// <summary>
+            /// Register H Level item in store
+            /// </summary>
+            internal static void Init()
             {
                 var icon = ResourceUtils.GetEmbeddedResource(
                     "hlevel_item.png", 
@@ -25,14 +28,10 @@ namespace IDHIPlugins
                 StoreApi.RegisterShopItem(
                     itemId: StoreItemId, 
                     itemName: "H Experience Levels", 
-                    explaination:"Gives access to H poses independent of heroine experience"
+                    explaination:"Gives access to H animations independent of heroine experience"
                         + " there are three levels.  Firs level for experience 50 second for " 
                         + "experience 100 and third (sorry no more space)",
-#if DEBUG
-                    shopType: StoreApi.ShopType.Normal,
-#else
                     shopType: StoreApi.ShopType.NightOnly,
-#endif
                     itemBackground: StoreApi.ShopBackground.Pink,
                     itemCategory: helvelCategoryId,
                     stock: _stock, 
@@ -41,7 +40,7 @@ namespace IDHIPlugins
                     numText: "{0} available upgrades");
             }
 
-            static public int GetHLevel()
+            public static int GetHLevel()
             {
                 return StoreApi.GetItemAmountBought(StoreItemId);
             }
