@@ -6,6 +6,8 @@ using System.Collections.Generic;
 
 using HarmonyLib;
 
+using IDHIUtils;
+
 
 namespace IDHIPlugins
 {
@@ -21,7 +23,7 @@ namespace IDHIPlugins
             /// <param name="param"></param>
             [HarmonyPostfix]
             [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.LoadAddTaii), new Type[] { typeof(List<AddTaiiData.Param>) })]
-            static private void LoadAddTaiiPostfix(object __instance, List<AddTaiiData.Param> param)
+            private static void LoadAddTaiiPostfix(object __instance, List<AddTaiiData.Param> param)
             {
                 var hsceneTraverse = Traverse.Create(__instance);
                 var flags = hsceneTraverse
@@ -81,6 +83,42 @@ namespace IDHIPlugins
                             // For level greater than 2 set the entire dictionary to empty
                             dicExpAddTaii[mode].Clear();
                             break;
+                    }
+                }
+
+                // Work with extra loaded animations
+                var alPInfo = new Utilities.PInfo("essuhauled.animationloader");
+                if(alPInfo.Instance != null && alPInfo.VersionAtLeast("1.1.1.3"))
+                {
+                    var _alDicExpAddTaii = alPInfo.Traverse
+                        .Field<Dictionary<string,
+                            Dictionary<int, Dictionary<string, int>>>>("_alDicExpAddTaii").Value;
+
+                    var guids = new List<string>(_alDicExpAddTaii.Keys);
+                    foreach(var guid in guids)
+                    {
+                        modes = new List<int>(_alDicExpAddTaii[guid].Keys);
+                        foreach(var mode in modes)
+                        {
+                            switch(_hLevel)
+                            {
+                                case 1:
+                                    // For first Level clear all 50 sysTaii setting them to 0
+                                    var ids = new List<string>(_alDicExpAddTaii[guid][mode].Keys);
+                                    foreach(var id in ids)
+                                    {
+                                        if(_alDicExpAddTaii[guid][mode][id] <= 50)
+                                        {
+                                            _alDicExpAddTaii[guid][mode][id] = 0;
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    // For level greater than 2 set the entire dictionary to empty
+                                    _alDicExpAddTaii[guid][mode].Clear();
+                                    break;
+                            }
+                        }
                     }
                 }
             }
