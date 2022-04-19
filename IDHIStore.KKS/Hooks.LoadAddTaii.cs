@@ -86,13 +86,9 @@ namespace IDHIPlugins
                     }
                 }
 
-                // Work with extra loaded animations
-                var alPInfo = new Utilities.PInfo("essuhauled.animationloader");
-                if(alPInfo.Instance != null && alPInfo.VersionAtLeast("1.1.1.3"))
+                if (_animationLoaderOK)
                 {
-                    var _alDicExpAddTaii = alPInfo.Traverse
-                        .Field<Dictionary<string,
-                            Dictionary<int, Dictionary<string, int>>>>("_alDicExpAddTaii").Value;
+                    var _alDicExpAddTaii = _animatinLoaderPInfo.GetExpAddTaii();
 
                     var guids = new List<string>(_alDicExpAddTaii.Keys);
                     foreach(var guid in guids)
