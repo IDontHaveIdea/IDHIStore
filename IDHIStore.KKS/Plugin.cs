@@ -25,6 +25,8 @@ namespace IDHIPlugins
     public partial class IDHIStoreItems : BaseUnityPlugin
     {
         internal static Logg _Log = new();
+        internal static Utilities.PInfo _animatinLoaderPInfo = new();
+        internal static bool _animationLoaderOK = false;
 
         #region Unity methods
         private void Awake()
@@ -40,6 +42,11 @@ namespace IDHIPlugins
 
         private void Start()
         {
+            _animatinLoaderPInfo.GUID = "essuhauled.animationloader";
+            if (_animatinLoaderPInfo.Instance != null && _animatinLoaderPInfo.VersionAtLeast("1.1.1.3"))
+            {
+                _animationLoaderOK = true;
+            }
             Hooks.Init();
         }
         #endregion
