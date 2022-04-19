@@ -41,7 +41,8 @@ namespace IDHIPlugins
             };
 
             /// <summary>
-            /// When in pool or bathtub change coordinate as appropriate
+            /// When in pool (swin) or bathtub (bathing) change coordinate as appropriate current
+            /// clothes state is not modified (On, Half, Off, ..)
             /// </summary>
             /// <param name="__instance"></param>
             /// <param name="_nextAinmInfo"></param>
