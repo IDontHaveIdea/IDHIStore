@@ -197,7 +197,11 @@ namespace IDHIPlugins
                                 break;
                             case 1002:
                                 // Bookshelf Caress - Wall Mischievous Caress
+#if DEBUG
                                 anim.nameAnimation = "壁いたずら愛撫";
+#else
+                                anim.nameAnimation = "Wall Mischievous Caress";
+#endif
                                 anim.lstCategory.Add(new HSceneProc.Category
                                 {
                                     category = (int)PositionCategory.Wall,
@@ -214,12 +218,20 @@ namespace IDHIPlugins
                                 if (anim.id == 21)
                                 {
                                     // Fence Doggy - Wall Doggy 2
+#if DEBUG
                                     anim.nameAnimation = "壁バック2";
+#else
+                                    anim.nameAnimation = "Wall Doggy 2";
+#endif
                                 }
                                 if (anim.id == 22)
                                 {
                                     // Fence Lifting - Wall Lifting
+#if DEBUG
                                     anim.nameAnimation = "壁掴まり駅弁";
+#else
+                                    anim.nameAnimation = "Wall Lifting";
+#endif
                                 }
                                 anim.lstCategory.Add(new HSceneProc.Category
                                 {
@@ -246,7 +258,11 @@ namespace IDHIPlugins
                                 if (mode == 2)
                                 {
                                     // Volleyball Net Doggystyle - Wall Doggy 3
+#if DEBUG
                                     anim.nameAnimation = "壁バック3";
+#else
+                                    anim.nameAnimation = "Wall Doggy 3";
+#endif
                                     anim.lstCategory.Add(new HSceneProc.Category
                                     {
                                         category = (int)PositionCategory.Wall,
