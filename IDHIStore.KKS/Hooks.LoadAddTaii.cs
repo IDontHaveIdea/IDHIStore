@@ -6,8 +6,6 @@ using System.Collections.Generic;
 
 using HarmonyLib;
 
-using IDHIUtils;
-
 
 namespace IDHIPlugins
 {

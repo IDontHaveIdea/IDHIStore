@@ -13,6 +13,8 @@ namespace IDHIPlugins
         internal partial class Hooks
         {
             internal enum State { On = 0, Shift = 1, Hang = 2, Off = 3 }
+
+            // Clothes to take off in pool
             internal static readonly List<ChaFileDefine.ClothesKind> Clothes = new() {
                 ChaFileDefine.ClothesKind.top,
                 ChaFileDefine.ClothesKind.bot,
@@ -21,6 +23,9 @@ namespace IDHIPlugins
                 ChaFileDefine.ClothesKind.socks,
                 ChaFileDefine.ClothesKind.shoes_inner
             };
+
+            // Footjob related animations
+            // TODO: Maybe external configuarion file
             internal static readonly List<string> _FootJob = new() {
                 "kpluganim-houshi-khh_f_82-023",
                 "kpluganim-houshi-khh_f_63-004",
@@ -92,7 +97,7 @@ namespace IDHIPlugins
                         male.ChangeCoordinateTypeAndReload(ChaFileDefine.CoordinateType.Bathing);
                         _Log.Debug("0008: Changing to bathing");
                     }
-                    // Footjobs
+                    // Footjob animations
                     else if (_nextAinmInfo.mode == HFlag.EMode.houshi)
                     {
                         if (_animationLoaderOK && _FootJob.Contains(animationKey))
