@@ -269,6 +269,17 @@ namespace IDHIPlugins
                                     });
                                 }
                                 break;
+                            case 1307:
+                                if (mode == 2)
+                                {
+                                    if (useCategorys.Contains(9))
+                                    {
+                                        anim.lstCategory.Add(new HSceneProc.Category {
+                                            category = (int)PositionCategory.StandPool,
+                                        });
+                                    }
+                                }
+                                break;
                         }
                     }
                 }

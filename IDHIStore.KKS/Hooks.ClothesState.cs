@@ -79,7 +79,9 @@ namespace IDHIPlugins
                     }
 
                     // Pool
-                    if (categorys.Contains(1307) || categorys.Contains(1004))
+                    if (categorys.Contains(1307)
+                        || categorys.Contains(1004)
+                        || categorys.Contains(9))
                     {
                         female.ChangeCoordinateTypeAndReload(ChaFileDefine.CoordinateType.Swim);
                         male.ChangeCoordinateTypeAndReload(ChaFileDefine.CoordinateType.Swim);
