@@ -42,7 +42,8 @@ namespace IDHIPlugins
                 "kpluganim-houshi-khh_f_77-018",
                 "kpluganim-houshi-khh_f_80-021",
                 "kpluganim-houshi-khh_f_84-025",
-                "kpluganim-houshi-khh_f_75-016"
+                "kpluganim-houshi-khh_f_75-016",
+                "kpluganim-houshi-khh_f_105-1002"
             };
 
             /// <summary>
