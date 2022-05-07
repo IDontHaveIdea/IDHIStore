@@ -1,6 +1,6 @@
 # IDHIStore
 
-This is a store item that will permit access to H poses regardless of Heroine experience level. The item has 3 levels to buy. The access for a first time encounter:
+This is a store item for **Koikatsu Sunshine** that will permit access to H poses regardless of Heroine experience level. The item has 3 levels to buy. The access for a first time encounter:
 
 1. No experience level. The poses in this group are always available no need for the item.
 2. At least 50% experience. The first level of the item will unlock the poses in this group.
