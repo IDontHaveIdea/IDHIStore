@@ -43,7 +43,8 @@ namespace IDHIPlugins
                 "kpluganim-houshi-khh_f_80-021",
                 "kpluganim-houshi-khh_f_84-025",
                 "kpluganim-houshi-khh_f_75-016",
-                "kpluganim-houshi-khh_f_105-1002"
+                "kpluganim-houshi-khh_f_105-1002",
+                "com.illusion-houshi3P-khh3_f_02_00-004"
             };
 
             /// <summary>
@@ -101,7 +102,8 @@ namespace IDHIPlugins
                         _Log.Debug("0008: Changing to bathing");
                     }
                     // Footjob animations
-                    else if (_nextAinmInfo.mode == HFlag.EMode.houshi)
+                    else if (_nextAinmInfo.mode == HFlag.EMode.houshi
+                        || _nextAinmInfo.mode == HFlag.EMode.houshi3P)
                     {
                         if (_animationLoaderOK && _FootJob.Contains(animationKey))
                         {
