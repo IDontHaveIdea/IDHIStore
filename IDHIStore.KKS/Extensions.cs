@@ -33,15 +33,15 @@ namespace IDHIPlugins
             {
                 var animationInfo = pInfo.Traverse
                         .Method("GetAnimationKey",
-                            new Type[] { typeof(HSceneProc.AnimationListInfo), typeof(bool) });
+                            new Type[] { typeof(HSceneProc.AnimationListInfo) });
                 if(animationInfo != null)
                 {
-                    tmp = animationInfo?.GetValue<string>(anim, true);
+                    tmp = animationInfo?.GetValue<string>(anim);
                 }
             }
             catch(Exception ex)
             {
-                IDHIStoreItems._Log.Error($"Error: {ex.Message}");
+                IDHIStoreItems._Log.Error($"0012: Error: {ex.Message}");
             }
 
             return tmp;
