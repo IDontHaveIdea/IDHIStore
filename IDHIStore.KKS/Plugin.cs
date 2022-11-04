@@ -17,7 +17,7 @@ namespace IDHIPlugins
     /// KKS Store plug-in that will make available the animations regardless of heroine experience
     /// </summary>
     [BepInDependency(KoikatuAPI.GUID, KoikatuAPI.VersionConst)]
-    [BepInDependency(Utilities.GUID, Utilities.Version)]
+    [BepInDependency(IDHIUtils.Info.GUID, IDHIUtils.Info.Version)]
     [BepInDependency("essuhauled.animationloader", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(GUID, PluginDisplayName, Version)]
     [BepInProcess(KoikatuAPI.GameProcessName)]
