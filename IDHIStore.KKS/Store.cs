@@ -28,9 +28,10 @@ namespace IDHIPlugins
                 StoreApi.RegisterShopItem(
                     itemId: StoreItemId, 
                     itemName: "H Experience Levels", 
-                    explaination:"Gives access to H animations independent of heroine experience"
-                        + " there are three levels.  Firs level for experience 50 second for " 
-                        + "experience 100 and third (sorry no more space)",
+                    explaination:"Gives access to H animations independent of heroine"
+                        + " experience there are three levels.  Firs level for "
+                        + "experience 50 second for experience 100 and third "
+                        + "(sorry no more space)",
                     shopType: StoreApi.ShopType.NightOnly,
                     itemBackground: StoreApi.ShopBackground.Pink,
                     itemCategory: helvelCategoryId,

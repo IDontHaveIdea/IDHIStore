@@ -22,9 +22,11 @@ namespace IDHIPlugins
         {
             /// <summary>
             /// Add animations that work on specific H points
-            /// 12 - Bench Blowjob animation added to some of the available working H points
+            /// 12 - Bench Blowjob animation added to some of the available working
+            /// H points
             /// </summary>
-            internal static Dictionary<int, Dictionary<int, List<string>>> MapHPoints = new()
+            internal static Dictionary<int, Dictionary<int, List<string>>> MapHPoints
+                = new()
             {
                 // Training Center Outside
                 {  2, new Dictionary<int, List<string>>
@@ -163,7 +165,8 @@ namespace IDHIPlugins
                 {
                     foreach (var anim in lstAnimInfo[mode].Where(x
                         => x.lstCategory.Any(c
-                            => (c.category == 12) || (c.category >= 1000 && c.category < 1999))))
+                            => (c.category == 12)
+                                || (c.category >= 1000 && c.category < 1999))))
                     {
                         if (anim.lstCategory.Any(c => useCategorys.Contains(c.category)))
                         {
@@ -186,7 +189,8 @@ namespace IDHIPlugins
                                         {
                                             hPointData.category = 
                                                 hPointData.category
-                                                    .Concat(new int[] { category }).ToArray();
+                                                    .Concat(new int[] { category })
+                                                    .ToArray();
                                             if(!useCategorys.Contains(category))
                                             {
                                                 useCategorys.Add(category);
@@ -248,7 +252,8 @@ namespace IDHIPlugins
 #if DEBUG
                             case 1200:
                                 // Straddle Bench Blowjob
-                                // Position has to be rotated for it to work need more research
+                                // Position has to be rotated for it to work need
+                                // more research
                                 anim.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.BacklessBench,
                                 });

@@ -20,8 +20,12 @@ namespace IDHIPlugins
             /// <param name="__instance"></param>
             /// <param name="param"></param>
             [HarmonyPostfix]
-            [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.LoadAddTaii), new Type[] { typeof(List<AddTaiiData.Param>) })]
-            private static void LoadAddTaiiPostfix(object __instance, List<AddTaiiData.Param> param)
+            [HarmonyPatch(
+                typeof(HSceneProc),
+                nameof(HSceneProc.LoadAddTaii),
+                new Type[] { typeof(List<AddTaiiData.Param>) })]
+            private static void LoadAddTaiiPostfix(
+                object __instance, List<AddTaiiData.Param> param)
             {
                 var hsceneTraverse = Traverse.Create(__instance);
                 var flags = hsceneTraverse
@@ -61,7 +65,8 @@ namespace IDHIPlugins
                         if (!_dicExpAddTaii.ContainsKey(mode))
                         {
                             // Save the original dictionary
-                            _dicExpAddTaii.Add(mode, new Dictionary<int, int>(dicExpAddTaii[mode]));
+                            _dicExpAddTaii.Add(
+                                mode, new Dictionary<int, int>(dicExpAddTaii[mode]));
                         }
                     }
                     switch (_hLevel)
@@ -78,7 +83,7 @@ namespace IDHIPlugins
                             }
                             break;
                         default:
-                            // For level greater than 2 set the entire dictionary to empty
+                            // For level > 2 set the entire dictionary to empty
                             dicExpAddTaii[mode].Clear();
                             break;
                     }
@@ -86,7 +91,7 @@ namespace IDHIPlugins
 
                 if (_animationLoaderOK)
                 {
-                    var _alDicExpAddTaii = _animatinLoaderPInfo.GetExpAddTaii();
+                    var _alDicExpAddTaii = _animationLoader.GetExpAddTaii();
 
                     var guids = new List<string>(_alDicExpAddTaii.Keys);
                     foreach(var guid in guids)
@@ -97,8 +102,10 @@ namespace IDHIPlugins
                             switch(_hLevel)
                             {
                                 case 1:
-                                    // For first Level clear all 50 sysTaii setting them to 0
-                                    var ids = new List<string>(_alDicExpAddTaii[guid][mode].Keys);
+                                    // For first Level clear all 50 sysTaii
+                                    // setting them to 0
+                                    var ids = new List<string>
+                                        (_alDicExpAddTaii[guid][mode].Keys);
                                     foreach(var id in ids)
                                     {
                                         if(_alDicExpAddTaii[guid][mode][id] <= 50)
@@ -108,7 +115,8 @@ namespace IDHIPlugins
                                     }
                                     break;
                                 default:
-                                    // For level greater than 2 set the entire dictionary to empty
+                                    // For level greater than 2 set the entire
+                                    // dictionary to empty
                                     _alDicExpAddTaii[guid][mode].Clear();
                                     break;
                             }

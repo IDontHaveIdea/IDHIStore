@@ -27,7 +27,8 @@ namespace IDHIPlugins
     public partial class IDHIStoreItems
     {
         public const string GUID = "com.ihavenoidea.idhistore";
-        public const string Version = "1.0.1.0";
+        public const string Version = "1.0.2.0";
+        public const string AnimationLoaderVersion = "1.1.2.2";
 #if DEBUG
         public const string PluginDisplayName = "IDHI Store Items (Debug)";
 #else

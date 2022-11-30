@@ -48,8 +48,8 @@ namespace IDHIPlugins
             };
 
             /// <summary>
-            /// When in pool (swin) or bathtub (bathing) change coordinate as appropriate current
-            /// clothes state is not modified (On, Half, Off, ..)
+            /// When in pool (swin) or bathtub (bathing) change coordinate as
+            /// appropriate current clothes state is not modified (On, Half, Off, ..)
             /// </summary>
             /// <param name="__instance"></param>
             /// <param name="_nextAinmInfo"></param>
@@ -77,7 +77,7 @@ namespace IDHIPlugins
 
                     if(_animationLoaderOK)
                     {
-                        animationKey = _animatinLoaderPInfo.GetAnimationKey(_nextAinmInfo);
+                        animationKey = _animationLoader.GetAnimationKey(_nextAinmInfo);
                     }
 
                     // Pool
@@ -85,8 +85,10 @@ namespace IDHIPlugins
                         || categorys.Contains(1004)
                         || categorys.Contains(9))
                     {
-                        female.ChangeCoordinateTypeAndReload(ChaFileDefine.CoordinateType.Swim);
-                        male.ChangeCoordinateTypeAndReload(ChaFileDefine.CoordinateType.Swim);
+                        female.ChangeCoordinateTypeAndReload(
+                            ChaFileDefine.CoordinateType.Swim);
+                        male.ChangeCoordinateTypeAndReload(
+                            ChaFileDefine.CoordinateType.Swim);
 
                         foreach(var cloth in Clothes)
                         {
@@ -97,8 +99,10 @@ namespace IDHIPlugins
                     // Bathtub VIP room
                     else if (categorys.Contains(1306))
                     {
-                        female.ChangeCoordinateTypeAndReload(ChaFileDefine.CoordinateType.Bathing);
-                        male.ChangeCoordinateTypeAndReload(ChaFileDefine.CoordinateType.Bathing);
+                        female.ChangeCoordinateTypeAndReload(
+                            ChaFileDefine.CoordinateType.Bathing);
+                        male.ChangeCoordinateTypeAndReload(
+                            ChaFileDefine.CoordinateType.Bathing);
                         _Log.Debug("0008: Changing to bathing");
                     }
                     // Footjob animations
@@ -107,14 +111,17 @@ namespace IDHIPlugins
                     {
                         if (_animationLoaderOK && _FootJob.Contains(animationKey))
                         {
-                            female.SetClothesState((int)ChaFileDefine.ClothesKind.shoes_inner, (byte)State.Off);
+                            female.SetClothesState(
+                                (int)ChaFileDefine.ClothesKind.shoes_inner,
+                                (byte)State.Off);
                             _Log.Debug("0011: Taking of shoes");
                         }
                     }
                 }
                 catch(Exception e)
                 {
-                    _Log.Level(LogLevel.Debug, $"0009: [ClothesState] Error - {e.Message}");
+                    _Log.Level(LogLevel.Debug, $"0009: [ClothesState] Error - " +
+                        $"{e.Message}");
                 }
             }
         }
