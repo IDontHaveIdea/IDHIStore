@@ -18,7 +18,8 @@ namespace IDHIPlugins
             /// </summary>
             /// <param name="__instance">HSceneProc instance</param>
             [HarmonyPostfix]
-            [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.CreateListAnimationFileName))]
+            [HarmonyPatch(
+                typeof(HSceneProc), nameof(HSceneProc.CreateListAnimationFileName))]
             public static void ExtendUseAnimInfoPostfix(
                 object __instance)
             {
@@ -65,12 +66,14 @@ namespace IDHIPlugins
                         // check we have a correct category
                         if (flagCategoryRange1)
                         {
-                            if (!lstAnimInfo[mode][id].lstCategory.Any(c => categorys.Contains(c.category)))
+                            if (!lstAnimInfo[mode][id].lstCategory
+                                .Any(c => categorys.Contains(c.category)))
                             {
                                 continue;
                             }
                         }
-                        else if (!lstAnimInfo[mode][id].lstCategory.Any(c => useCategorys.Contains(c.category)))
+                        else if (!lstAnimInfo[mode][id].lstCategory
+                            .Any(c => useCategorys.Contains(c.category)))
                         {
                             continue;
                         }

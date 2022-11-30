@@ -14,20 +14,21 @@ using IDHIUtils;
 namespace IDHIPlugins
 {
     /// <summary>
-    /// KKS Store plug-in that will make available the animations regardless of heroine experience
+    /// KKS Store plug-in that will make available the animations regardless of
+    /// heroine experience
     /// </summary>
     [BepInDependency(KoikatuAPI.GUID, KoikatuAPI.VersionConst)]
     [BepInDependency(IDHIUtils.Info.GUID, IDHIUtils.Info.Version)]
-    [BepInDependency("essuhauled.animationloader",
-        BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency(
+        "essuhauled.animationloader", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(GUID, PluginDisplayName, Version)]
     [BepInProcess(KoikatuAPI.GameProcessName)]
     [BepInProcess(KoikatuAPI.VRProcessName)]
     public partial class IDHIStoreItems : BaseUnityPlugin
     {
         internal static Logg _Log = new();
-        internal static Utilities.PInfo _animatinLoaderPInfo = new();
         internal static bool _animationLoaderOK = false;
+        internal static AnimationLoader _animationLoader;
 
         #region Unity methods
         private void Awake()
@@ -43,8 +44,9 @@ namespace IDHIPlugins
 
         private void Start()
         {
-            _animatinLoaderPInfo.GUID = "essuhauled.animationloader";
-            if (_animatinLoaderPInfo.Instance != null && _animatinLoaderPInfo.VersionAtLeast("1.1.1.3"))
+            _animationLoader = new AnimationLoader();
+            if (_animationLoader.Instance != null
+                && _animationLoader.VersionAtLeast("1.1.2.2"))
             {
                 _animationLoaderOK = true;
             }
