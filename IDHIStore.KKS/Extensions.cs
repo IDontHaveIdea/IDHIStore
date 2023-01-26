@@ -18,7 +18,7 @@ namespace IDHIPlugins
             var _alDicExpAddTaii = pInfo.Traverse
                     .Field<Dictionary<string,
                         Dictionary<int, Dictionary<string, int>>>>("_alDicExpAddTaii")
-                        .Value;
+                            .Value;
             return _alDicExpAddTaii;
         }
 
