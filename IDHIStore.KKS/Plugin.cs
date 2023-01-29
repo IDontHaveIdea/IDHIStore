@@ -18,7 +18,7 @@ namespace IDHIPlugins
     /// heroine experience
     /// </summary>
     [BepInDependency(KoikatuAPI.GUID, KoikatuAPI.VersionConst)]
-    [BepInDependency(IDHIUtils.Info.GUID, IDHIUtils.Info.Version)]
+    [BepInDependency(IDHIUtils.Utilities.GUID, IDHIUtils.Utilities.Version)]
     [BepInDependency(
         "essuhauled.animationloader", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(GUID, PluginDisplayName, Version)]
@@ -36,6 +36,7 @@ namespace IDHIPlugins
             _Log.SetLogSource(base.Logger);
             ConfigEntries();
             _Log.Enabled = DebugInfo.Value;
+            _Log.DebugToConsole = DebugToConsole.Value;
 #if DEBUG
             _Log.Level(LogLevel.Info, $"0010: Logging set to {_Log.Enabled}");
 #endif
