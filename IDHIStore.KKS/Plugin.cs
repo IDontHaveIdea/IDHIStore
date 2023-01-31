@@ -18,7 +18,7 @@ namespace IDHIPlugins
     /// heroine experience
     /// </summary>
     [BepInDependency(KoikatuAPI.GUID, KoikatuAPI.VersionConst)]
-    [BepInDependency(IDHIUtils.Utilities.GUID, IDHIUtils.Utilities.Version)]
+    [BepInDependency(IDHIUtilsInfo.GUID, IDHIUtilsInfo.Version)]
     [BepInDependency(
         "essuhauled.animationloader", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(GUID, PluginDisplayName, Version)]
