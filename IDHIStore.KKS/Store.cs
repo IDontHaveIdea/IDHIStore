@@ -23,7 +23,7 @@ namespace IDHIPlugins
                 var icon = ResourceUtils.GetEmbeddedResource(
                     "hlevel_item.png", 
                     typeof(IDHIStoreItems).Assembly).LoadTexture();
-                var helvelCategoryId = StoreApi.RegisterShopItemCategory(icon);
+                var hLevelCategoryId = StoreApi.RegisterShopItemCategory(icon);
 
                 StoreApi.RegisterShopItem(
                     itemId: StoreItemId, 
@@ -34,7 +34,7 @@ namespace IDHIPlugins
                         + "(sorry no more space)",
                     shopType: StoreApi.ShopType.NightOnly,
                     itemBackground: StoreApi.ShopBackground.Pink,
-                    itemCategory: helvelCategoryId,
+                    itemCategory: hLevelCategoryId,
                     stock: _stock, 
                     resetsDaily: false, 
                     cost: _cost,
