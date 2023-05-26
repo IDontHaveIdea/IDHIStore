@@ -5,7 +5,7 @@ using KKAPI.MainGame;
 using KKAPI.Utilities;
 
 
-namespace IDHIPlugins
+namespace IDHIPlugIns
 {
     public partial class IDHIStoreItems
     {

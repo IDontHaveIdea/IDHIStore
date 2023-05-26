@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using HarmonyLib;
 
 
-namespace IDHIPlugins
+namespace IDHIPlugIns
 {
     public partial class IDHIStoreItems
     {

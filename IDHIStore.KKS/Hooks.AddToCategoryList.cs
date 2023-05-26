@@ -1,6 +1,8 @@
 ﻿//
 // Hooks for Store - Add special animations categories to useCategorys
 //
+// Ignore Spelling: categorys
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +15,7 @@ using HarmonyLib;
 using UnityEngine;
 
 
-namespace IDHIPlugins
+namespace IDHIPlugIns
 {
     public partial class IDHIStoreItems
     {
@@ -27,10 +29,10 @@ namespace IDHIPlugins
             [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.GetCloseCategory))]
             private static void AddToCategoryListPostfix(object __instance)
             {
-                var hsceneTraverse = Traverse.Create(__instance);
-                var flags = hsceneTraverse
+                var hSceneTraverse = Traverse.Create(__instance);
+                var flags = hSceneTraverse
                     .Field<HFlag>("flags").Value;
-                var categorys = hsceneTraverse.Field<List<int>>("categorys").Value;
+                var categorys = hSceneTraverse.Field<List<int>>("categorys").Value;
 
                 if (flags.isFreeH)
                 {
@@ -58,15 +60,15 @@ namespace IDHIPlugins
 
                 #region get needed fields using reflection
                 var lines = new StringBuilder();
-                var lstInitCategory = hsceneTraverse
+                var lstInitCategory = hSceneTraverse
                     .Field<List<int>>("lstInitCategory").Value;
-                var map = hsceneTraverse
+                var map = hSceneTraverse
                     .Field<ActionMap>("map").Value;
-                var nowHpointData = hsceneTraverse
+                var nowHpointData = hSceneTraverse
                     .Field<string>("nowHpointData").Value;
-                var closeHpointData = hsceneTraverse
+                var closeHpointData = hSceneTraverse
                     .Field<List<HPointData>>("closeHpointData").Value;
-                var useCategorys = hsceneTraverse
+                var useCategorys = hSceneTraverse
                     .Field<List<int>>("useCategorys").Value;
                 #endregion
 
@@ -103,14 +105,14 @@ namespace IDHIPlugins
                     hPointDataArray[index1].BackUpPosition();
                 }
 
-                var msg = new StringBuilder();
+                //var msg = new StringBuilder();
 
                 // Loop through special animations and add any missing
                 // special category to the used category list
                 foreach (var hPointData in componentsInChildren.Where(
                     x => x.category.Any(c => (c == 12) || (c >= 1000 && c < 1999))))
                 {
-                    msg.Clear();
+                    //msg.Clear();
                     if (!component.list.Contains(hPointData.gameObject))
                     {
                         var category = hPointData.category[0];

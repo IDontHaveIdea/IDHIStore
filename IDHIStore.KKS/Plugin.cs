@@ -11,7 +11,7 @@ using KKAPI;
 using IDHIUtils;
 
 
-namespace IDHIPlugins
+namespace IDHIPlugIns
 {
     /// <summary>
     /// KKS Store plug-in that will make available the animations regardless of

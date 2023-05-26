@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using IDHIPlugins;
+using IDHIPlugIns;
 using IDHIUtils;
 
 #region Assembly attributes
@@ -22,7 +22,7 @@ using IDHIUtils;
 //
 
 
-namespace IDHIPlugins
+namespace IDHIPlugIns
 {
     public partial class IDHIStoreItems
     {

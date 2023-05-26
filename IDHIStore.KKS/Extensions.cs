@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using IDHIUtils;
 
-namespace IDHIPlugins
+namespace IDHIPlugIns
 {
     public static class Extensions
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using HarmonyLib;
 
 
-namespace IDHIPlugins
+namespace IDHIPlugIns
 {
     public partial class IDHIStoreItems
     {
