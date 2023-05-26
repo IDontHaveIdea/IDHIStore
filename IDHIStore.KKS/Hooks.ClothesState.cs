@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: categorys Ainm
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +8,7 @@ using BepInEx.Logging;
 
 using HarmonyLib;
 
-namespace IDHIPlugins
+namespace IDHIPlugIns
 {
     public partial class IDHIStoreItems
     {
@@ -44,7 +46,9 @@ namespace IDHIPlugins
                 "kpluganim-houshi-khh_f_84-025",
                 "kpluganim-houshi-khh_f_75-016",
                 "kpluganim-houshi-khh_f_105-1022",
-                "com.illusion-houshi3P-khh3_f_02_00-004"
+                "com.illusion-houshi3P-khh3_f_02_00-004",
+                "com.illusion-sonyu-khs_f_n27-027"
+
             };
 
             /// <summary>
@@ -55,14 +59,14 @@ namespace IDHIPlugins
             /// <param name="_nextAinmInfo"></param>
             [HarmonyPrefix]
             [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.ChangeAnimator))]
-            private static void PoolClothesPrefix(
+            private static void ClothesStatePrefix(
                 object __instance,
                 HSceneProc.AnimationListInfo _nextAinmInfo)
             {
-                var hsceneTraverse = Traverse.Create(__instance);
-                var flags = hsceneTraverse
+                var hSceneTraverse = Traverse.Create(__instance);
+                var flags = hSceneTraverse
                         .Field<HFlag>("flags").Value;
-                var categorys = hsceneTraverse.Field<List<int>>("categorys").Value;
+                var categorys = hSceneTraverse.Field<List<int>>("categorys").Value;
 
                 if(flags.isFreeH)
                 {
@@ -105,20 +109,28 @@ namespace IDHIPlugins
                             ChaFileDefine.CoordinateType.Bathing);
                         _Log.Debug("0008: Changing to bathing");
                     }
-                    // Footjob animations
-                    else if (_nextAinmInfo.mode == HFlag.EMode.houshi
-                        || _nextAinmInfo.mode == HFlag.EMode.houshi3P)
+                    // Foot job animations
+                    else if (_animationLoaderOK && _FootJob.Contains(animationKey))
                     {
-                        if (_animationLoaderOK && _FootJob.Contains(animationKey))
-                        {
-                            female.SetClothesState(
-                                (int)ChaFileDefine.ClothesKind.shoes_inner,
-                                (byte)State.Off);
-                            _Log.Debug("0011: Taking of shoes");
-                        }
+                        female.SetClothesState(
+                            (int)ChaFileDefine.ClothesKind.shoes_inner,
+                            (byte)State.Off);
+                        _Log.Debug("0011: Taking of shoes");
                     }
+                    // Old
+                    //else if (_nextAinmInfo.mode == HFlag.EMode.houshi
+                    //    || _nextAinmInfo.mode == HFlag.EMode.houshi3P)
+                    //{
+                    //    if (_animationLoaderOK && _FootJob.Contains(animationKey))
+                    //    {
+                    //        female.SetClothesState(
+                    //            (int)ChaFileDefine.ClothesKind.shoes_inner,
+                    //            (byte)State.Off);
+                    //        _Log.Debug("0011: Taking of shoes");
+                    //    }
+                    //}
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     _Log.Level(LogLevel.Debug, $"0009: [ClothesState] Error - " +
                         $"{e.Message}");
