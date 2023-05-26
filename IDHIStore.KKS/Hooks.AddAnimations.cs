@@ -1,6 +1,8 @@
 ﻿//
 // Hooks for Store - Add animations changing it's context to Category list
 //
+// Ignore Spelling: categorys
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +16,7 @@ using HarmonyLib;
 using IDHIUtils;
 
 
-namespace IDHIPlugins
+namespace IDHIPlugIns
 {
     public partial class IDHIStoreItems
     {
@@ -31,6 +33,7 @@ namespace IDHIPlugins
                 // Training Center Outside
                 {  2, new Dictionary<int, List<string>>
                     {
+                        // Bench Blowjob
                         { 12, new List<string>
                             {
                                 "nagaisu_00",
@@ -42,6 +45,7 @@ namespace IDHIPlugins
                 // Harbor
                 {  3, new Dictionary<int, List<string>>
                     {
+                        // Bench Blowjob
                         { 12, new List<string>
                             {
                                 "nagaisu_00 (1)"
@@ -52,6 +56,7 @@ namespace IDHIPlugins
                 // Nature Park
                 {  5, new Dictionary<int, List<string>>
                     {
+                        // Bench Blowjob
                         { 12, new List<string>
                             {
                                 "senasi_nagaisu_00",
@@ -64,6 +69,7 @@ namespace IDHIPlugins
                 // Aquarium Outside
                 {  7, new Dictionary<int, List<string>>
                     {
+                        // Bench Blowjob
                         { 12, new List<string>
                             {
                                 "nagaisu_00 (5)",
@@ -73,9 +79,21 @@ namespace IDHIPlugins
                         }
                     }
                 },
+                // Stone Wall Pathway
+                {  8, new Dictionary<int, List<string>>
+                    {
+                        // Box Doggy
+                        { 1009, new List<string>
+                            {
+                                "senasi_naga_isu_00"
+                            }
+                        }
+                    }
+                },
                 // Hotel Lobby
                 { 11, new Dictionary<int, List<string>>
                     {
+                        // Bench Blowjob
                         { 12, new List<string>
                             {
                                 "nagaisu_00 (1)",
@@ -87,6 +105,7 @@ namespace IDHIPlugins
                 // Hotel Changing Room
                 { 17, new Dictionary<int, List<string>>
                     {
+                        // Bench Blowjob
                         { 12, new List<string>
                             {
                                 "nagaisu_00",
@@ -98,6 +117,7 @@ namespace IDHIPlugins
                 // Training Center
                 { 23, new Dictionary<int, List<string>>
                     {
+                        // Bench Blowjob
                         { 12, new List<string> 
                             {
                                 "nagaisu_00",
@@ -110,6 +130,7 @@ namespace IDHIPlugins
                 { 35,
                     new Dictionary<int, List<string>>
                     {
+                        // Bench Blowjob
                         { 12, new List<string>
                             {
                                 "nagaisu_00"
@@ -177,27 +198,49 @@ namespace IDHIPlugins
                         switch (category)
                         {
                             case 12:
-                                // Bench Blowjob
-                                if (MapHPoints.ContainsKey(map.no)
-                                    && MapHPoints[map.no].ContainsKey(category))
-                                {
-                                    var validHPoints = MapHPoints[map.no][category];
+                            // Bench Blowjob
+                            case 1009:
+                            // Box Doggy
 
+                                // Add new category to an HPoint
+                                if (MapHPoints.TryGetValue(map.no, out var hPointCategory)
+                                    && hPointCategory.TryGetValue(category, out var validHPoints))
+                                {
                                     foreach (var hPointData in closeHpointData)
                                     {
                                         if (validHPoints.Contains(hPointData.name))
                                         {
-                                            hPointData.category = 
+                                            hPointData.category =
                                                 hPointData.category
                                                     .Concat(new int[] { category })
                                                     .ToArray();
-                                            if(!useCategorys.Contains(category))
+                                            if (!useCategorys.Contains(category))
                                             {
                                                 useCategorys.Add(category);
                                             }
                                         }
                                     }
                                 }
+                                /*if (MapHPoints.ContainsKey(map.no)
+                                    && MapHPoints[map.no].ContainsKey(category))
+                                {
+                                    var vHPoints = MapHPoints[map.no][category];
+
+                                    foreach (var hPointData in closeHpointData)
+                                    {
+                                        if (vHPoints.Contains(hPointData.name))
+                                        {
+                                            hPointData.category =
+                                                hPointData.category
+                                                    .Concat(new int[] { category })
+                                                    .ToArray();
+                                            if (!useCategorys.Contains(category))
+                                            {
+                                                useCategorys.Add(category);
+                                            }
+                                        }
+                                    }
+                                }*/
                                 break;
                             case 1002:
                                 // Bookshelf Caress - Wall Mischievous Caress
@@ -206,15 +249,7 @@ namespace IDHIPlugins
 #else
                                 anim.nameAnimation = "Wall Mischievous Caress";
 #endif
-                                anim.lstCategory.Add(new HSceneProc.Category
-                                {
-                                    category = (int)PositionCategory.Wall,
-                                });
-                                break;
-                            case 1304:
-                                // Pressed From Behind
-                                anim.lstCategory.Add(new HSceneProc.Category
-                                {
+                                anim.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.Wall,
                                 });
                                 break;
@@ -237,19 +272,20 @@ namespace IDHIPlugins
                                     anim.nameAnimation = "Wall Lifting";
 #endif
                                 }
-                                anim.lstCategory.Add(new HSceneProc.Category
-                                {
+                                anim.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.Wall,
                                 });
                                 break;
+#if DEBUG
                             case 1008:
                                 // Piledriver Missionary
-                                anim.lstCategory.Add(new HSceneProc.Category
-                                {
+                                anim.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.SitChair,
                                 });
+                                anim.lstCategory.Add(new HSceneProc.Category {
+                                    category = (int)PositionCategory.SofaBench,
+                                });
                                 break;
-#if DEBUG
                             case 1200:
                                 // Straddle Bench Blowjob
                                 // Position has to be rotated for it to work need
@@ -257,6 +293,15 @@ namespace IDHIPlugins
                                 anim.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.BacklessBench,
                                 });
+                                break;
+                            case 1201:
+                                // Sofa Cowgirl
+                                if (MapHPoints.TryGetValue(map.no, out var hCategory))
+                                {
+                                    anim.lstCategory.Add(new HSceneProc.Category {
+                                        category = (int)PositionCategory.SofaBench,
+                                    });
+                                }
                                 break;
 #endif
                             case 1300:
@@ -274,7 +319,15 @@ namespace IDHIPlugins
                                     });
                                 }
                                 break;
+                            case 1304:
+                                // Pressed From Behind
+                                anim.lstCategory.Add(new HSceneProc.Category {
+                                    category = (int)PositionCategory.Wall,
+                                });
+                                break;
                             case 1307:
+                                // Beach Ball Missionary
+                                // Float Doggystyle
                                 if (mode == 2)
                                 {
                                     if (useCategorys.Contains(9))
