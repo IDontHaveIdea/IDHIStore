@@ -21,7 +21,7 @@ namespace IDHIPlugIns
     [BepInDependency(IDHIUtilsInfo.GUID, "1.0.1.0")]
     [BepInDependency(
         "essuhauled.animationloader", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInPlugin(GUID, PluginDisplayName, Version)]
+    [BepInPlugin(GUID, PlugInDisplayName, Version)]
     [BepInProcess(KoikatuAPI.GameProcessName)]
     [BepInProcess(KoikatuAPI.VRProcessName)]
     public partial class IDHIStoreItems : BaseUnityPlugin

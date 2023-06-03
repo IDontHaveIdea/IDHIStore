@@ -9,7 +9,7 @@ namespace IDHIPlugIns
 {
     public partial class IDHIStoreItems
     {
-        public const int StoreItemId = 4194304; // 2^22
+        public const int AnimationLevelItemId = Constants.StoreItemId; // 2^22
         internal const int _stock = 3;
         internal const int _cost = 200;
 
@@ -26,7 +26,7 @@ namespace IDHIPlugIns
                 var hLevelCategoryId = StoreApi.RegisterShopItemCategory(icon);
 
                 StoreApi.RegisterShopItem(
-                    itemId: StoreItemId, 
+                    itemId: AnimationLevelItemId, 
                     itemName: "H Experience Levels", 
                     explaination:"Gives access to H animations independent of heroine"
                         + " experience there are three levels.  Firs level for "
@@ -43,7 +43,7 @@ namespace IDHIPlugIns
 
             public static int GetHLevel()
             {
-                return StoreApi.GetItemAmountBought(StoreItemId);
+                return StoreApi.GetItemAmountBought(AnimationLevelItemId);
             }
         }
     }

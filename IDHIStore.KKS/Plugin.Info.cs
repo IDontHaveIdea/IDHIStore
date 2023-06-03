@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
+
 using IDHIPlugIns;
-using IDHIUtils;
 
 #region Assembly attributes
 
@@ -9,9 +9,9 @@ using IDHIUtils;
  * These attributes define various meta-information of the generated DLL.
  * In general, you don't need to touch these. Instead, edit the values in Info.
  */
-[assembly: AssemblyTitle(Constants.Prefix + "_" + IDHIStoreItems.PluginName 
+[assembly: AssemblyTitle(IDHIUtils.Constants.Prefix + "_" + IDHIStoreItems.PlugInName 
     + " (" + IDHIStoreItems.GUID + ")")]
-[assembly: AssemblyProduct(Constants.Prefix + "_" + IDHIStoreItems.PluginName)]
+[assembly: AssemblyProduct(IDHIUtils.Constants.Prefix + "_" + IDHIStoreItems.PlugInName)]
 [assembly: AssemblyVersion(IDHIStoreItems.Version)]
 [assembly: AssemblyFileVersion(IDHIStoreItems.Version)]
 
@@ -30,10 +30,15 @@ namespace IDHIPlugIns
         public const string Version = "1.0.2.0";
         public const string AnimationLoaderVersion = "1.1.2.2";
 #if DEBUG
-        public const string PluginDisplayName = "IDHI Store Items (Debug)";
+        public const string PlugInDisplayName = "IDHI Store Items (Debug)";
 #else
         public const string PluginDisplayName = "IDHI Store Items";
 #endif
-        public const string PluginName = "IDHIStore";
+        public const string PlugInName = "IDHIStore";
+    }
+
+    public static class Constants
+    {
+        public const int StoreItemId = 4194304;
     }
 }
