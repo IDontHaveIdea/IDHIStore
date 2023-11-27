@@ -17,18 +17,18 @@ namespace IDHIPlugIns
             internal enum State { On = 0, Shift = 1, Hang = 2, Off = 3 }
 
             // Clothes to take off in pool
-            internal static readonly List<ChaFileDefine.ClothesKind> Clothes = new() {
+            internal static readonly List<ChaFileDefine.ClothesKind> Clothes = [
                 ChaFileDefine.ClothesKind.top,
                 ChaFileDefine.ClothesKind.bot,
                 ChaFileDefine.ClothesKind.gloves,
                 ChaFileDefine.ClothesKind.panst,
                 ChaFileDefine.ClothesKind.socks,
                 ChaFileDefine.ClothesKind.shoes_inner
-            };
+            ];
 
             // Footjob related animations
             // TODO: Maybe external configuarion file
-            internal static readonly List<string> _FootJob = new() {
+            internal static readonly List<string> _FootJob = [
                 "kpluganim-houshi-khh_f_82-023",
                 "kpluganim-houshi-khh_f_63-004",
                 "kpluganim-houshi-khh_f_61-002",
@@ -49,7 +49,7 @@ namespace IDHIPlugIns
                 "com.illusion-houshi3P-khh3_f_02_00-004",
                 "com.illusion-sonyu-khs_f_n27-027"
 
-            };
+            ];
 
             /// <summary>
             /// When in pool (swin) or bathtub (bathing) change coordinate as
