@@ -10,7 +10,7 @@ namespace IDHIPlugIns
 {
     public partial class IDHIStoreItems
     {
-        internal static Dictionary<int, Dictionary<int, int>> _dicExpAddTaii = new();
+        internal static Dictionary<int, Dictionary<int, int>> _dicExpAddTaii = [];
 
         internal partial class Hooks
         {
