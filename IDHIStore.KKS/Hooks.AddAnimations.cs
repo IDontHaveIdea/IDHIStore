@@ -126,6 +126,18 @@ namespace IDHIPlugIns
                         }
                     }
                 },
+                // Clothing Shop
+                // Is in map 27 the Fitting Room
+                { 32, new Dictionary<int, List<string>>
+                    {
+                        // Reverse Cowgirl Against Wall
+                        { 1302, new List<string>
+                            {
+                                "HPointBase"
+                            }
+                        }
+                    }
+                },
                 // Souvenir Shop
                 { 35,
                     new Dictionary<int, List<string>>
@@ -199,6 +211,8 @@ namespace IDHIPlugIns
                         {
                             case 12:
                             // Bench Blowjob
+                            case 1302:
+                            // Reverse Cowgirl Against Wall
                             case 1009:
                             // Box Doggy
 
@@ -210,10 +224,13 @@ namespace IDHIPlugIns
                                     {
                                         if (validHPoints.Contains(hPointData.name))
                                         {
-                                            hPointData.category =
+                                            /*
                                                 hPointData.category
                                                     .Concat(new int[] { category })
                                                     .ToArray();
+                                             */
+                                            hPointData.category =
+                                                [.. hPointData.category, .. new int[] { category }];
                                             if (!useCategorys.Contains(category))
                                             {
                                                 useCategorys.Add(category);
