@@ -23,7 +23,7 @@ namespace IDHIPlugIns
             [HarmonyPatch(
                 typeof(HSceneProc),
                 nameof(HSceneProc.LoadAddTaii),
-                new Type[] { typeof(List<AddTaiiData.Param>) })]
+                [typeof(List<AddTaiiData.Param>)])]
             private static void LoadAddTaiiPostfix(
                 object __instance, List<AddTaiiData.Param> param)
             {

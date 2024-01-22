@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: Taii anim
+
+using System;
 using System.Collections.Generic;
 
 using IDHIUtils;
@@ -36,8 +38,8 @@ namespace IDHIPlugIns
             {
                 var animationInfo = pInfo.Traverse
                         .Method("GetAnimationKey",
-                            new Type[] {
-                                typeof(HSceneProc.AnimationListInfo), typeof(bool) });
+                            [
+                                typeof(HSceneProc.AnimationListInfo), typeof(bool) ]);
                 if(animationInfo != null)
                 {
                     tmp = animationInfo?.GetValue<string>(anim);
