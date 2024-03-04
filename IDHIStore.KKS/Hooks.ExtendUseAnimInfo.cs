@@ -1,6 +1,8 @@
 ﻿//
 // Hooks for Store - Add special animations to lstUseAnimInfo
 //
+// Ignore Spelling: Anim
+
 using System.Collections.Generic;
 using System.Linq;
 
