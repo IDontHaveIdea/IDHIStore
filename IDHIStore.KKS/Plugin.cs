@@ -11,17 +11,19 @@ using KKAPI;
 using IDHIUtils;
 
 
-namespace IDHIPlugIns
+namespace IDHIPlugins
 {
     /// <summary>
     /// KKS Store plug-in that will make available the animations regardless of
     /// heroine experience
     /// </summary>
     [BepInDependency(KoikatuAPI.GUID, KoikatuAPI.VersionConst)]
-    [BepInDependency(IDHIUtilsInfo.GUID, "1.0.1.0")]
+    [BepInDependency(IDHIUtilsInfo.GUID, "1.0.4.0")]
     [BepInDependency(
-        "essuhauled.animationloader", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInPlugin(GUID, PlugInDisplayName, Version)]
+        "essuhauled.animationloader",
+        BepInDependency.DependencyFlags.SoftDependency
+    )]
+    [BepInPlugin(GUID, PluginDisplayName, Version)]
     [BepInProcess(KoikatuAPI.GameProcessName)]
     [BepInProcess(KoikatuAPI.VRProcessName)]
     public partial class IDHIStoreItems : BaseUnityPlugin

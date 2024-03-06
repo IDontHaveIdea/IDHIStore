@@ -9,7 +9,7 @@ using System.Linq;
 using HarmonyLib;
 
 
-namespace IDHIPlugIns
+namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {

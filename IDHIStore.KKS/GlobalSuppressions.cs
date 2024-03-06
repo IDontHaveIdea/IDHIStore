@@ -11,4 +11,4 @@ using System.Diagnostics.CodeAnalysis;
     "IDE0060:Remove unused parameter",
     Justification = "Needed for patch to load",
     Scope = "member",
-    Target = "~M:IDHIPlugIns.IDHIStoreItems.Hooks.LoadAddTaiiPostfix(System.Object,System.Collections.Generic.List{AddTaiiData.Param})")]
+    Target = "~M:IDHIPlugins.IDHIStoreItems.Hooks.LoadAddTaiiPostfix(System.Object,System.Collections.Generic.List{AddTaiiData.Param})")]

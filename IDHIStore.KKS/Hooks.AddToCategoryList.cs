@@ -1,7 +1,6 @@
 ﻿//
 // Hooks for Store - Add special animations categories to useCategorys
 //
-// Ignore Spelling: categorys
 
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,7 @@ using HarmonyLib;
 using UnityEngine;
 
 
-namespace IDHIPlugIns
+namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {
@@ -105,14 +104,11 @@ namespace IDHIPlugIns
                     hPointDataArray[index1].BackUpPosition();
                 }
 
-                //var msg = new StringBuilder();
-
                 // Loop through special animations and add any missing
                 // special category to the used category list
                 foreach (var hPointData in componentsInChildren.Where(
                     x => x.category.Any(c => (c == 12) || (c >= 1000 && c < 1999))))
                 {
-                    //msg.Clear();
                     if (!component.list.Contains(hPointData.gameObject))
                     {
                         var category = hPointData.category[0];

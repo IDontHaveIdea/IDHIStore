@@ -8,7 +8,7 @@ using BepInEx.Logging;
 
 using HarmonyLib;
 
-namespace IDHIPlugIns
+namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {
@@ -110,13 +110,13 @@ namespace IDHIPlugIns
                         _Log.Debug("0008: Changing to bathing");
                     }
                     // Foot job animations
-                    else if (_animationLoaderOK && _FootJob.Contains(animationKey))
-                    {
-                        female.SetClothesState(
-                            (int)ChaFileDefine.ClothesKind.shoes_inner,
-                            (byte)State.Off);
-                        _Log.Debug("0011: Taking of shoes");
-                    }
+                    //else if (_animationLoaderOK && _FootJob.Contains(animationKey))
+                    //{
+                    //    female.SetClothesState(
+                    //        (int)ChaFileDefine.ClothesKind.shoes_inner,
+                    //        (byte)State.Off);
+                    //    _Log.Debug("0011: Taking shoes off.");
+                    //}
                     // Old
                     //else if (_nextAinmInfo.mode == HFlag.EMode.houshi
                     //    || _nextAinmInfo.mode == HFlag.EMode.houshi3P)

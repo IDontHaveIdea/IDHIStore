@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 using IDHIUtils;
 
-namespace IDHIPlugIns
+namespace IDHIPlugins
 {
     public static class Extensions
     {

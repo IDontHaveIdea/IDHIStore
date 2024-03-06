@@ -2,14 +2,12 @@
 // Configuration entries IDHIStore
 //
 
-using ADV.Commands.Base;
-
 using BepInEx.Configuration;
 using BepInEx.Logging;
 
 using KKAPI.Utilities;
 
-namespace IDHIPlugIns
+namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {
