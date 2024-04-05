@@ -299,9 +299,9 @@ namespace IDHIPlugins
                                 anim.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.SitChair,
                                 });
-                                anim.lstCategory.Add(new HSceneProc.Category {
-                                    category = (int)PositionCategory.SofaBench,
-                                });
+                                //anim.lstCategory.Add(new HSceneProc.Category {
+                                //    category = (int)PositionCategory.BacklessChair,
+                                //});
                                 break;
                             case 1200:
                                 // Straddle Bench Blowjob
