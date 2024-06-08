@@ -1,4 +1,8 @@
-﻿using System.Reflection;
+﻿//
+// Plugin Metadata
+//
+
+using System.Reflection;
 
 
 using IDHIPlugins;

@@ -1,12 +1,15 @@
-﻿// Ignore Spelling: categorys Ainm
+﻿//
+// Hooks for Store - Clothes state
+//
+// Ignore Spelling: categorys Ainm
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using BepInEx.Logging;
 
 using HarmonyLib;
+
 
 namespace IDHIPlugins
 {
