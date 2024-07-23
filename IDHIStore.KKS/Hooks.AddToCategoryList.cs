@@ -13,6 +13,7 @@ using HarmonyLib;
 
 using UnityEngine;
 
+using IDHIUtils;
 
 namespace IDHIPlugins
 {
@@ -28,10 +29,9 @@ namespace IDHIPlugins
             [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.GetCloseCategory))]
             private static void AddToCategoryListPostfix(object __instance)
             {
-                var hSceneTraverse = Traverse.Create(__instance);
-                var flags = hSceneTraverse
-                    .Field<HFlag>("flags").Value;
-                var categorys = hSceneTraverse.Field<List<int>>("categorys").Value;
+                var hSceneTraverse = new HSceneProcTraverse(__instance);
+                var flags = hSceneTraverse.flags;
+                var categorys = hSceneTraverse.categorys;
 
                 if (flags.isFreeH)
                 {
@@ -59,16 +59,11 @@ namespace IDHIPlugins
 
                 #region get needed fields using reflection
                 var lines = new StringBuilder();
-                var lstInitCategory = hSceneTraverse
-                    .Field<List<int>>("lstInitCategory").Value;
-                var map = hSceneTraverse
-                    .Field<ActionMap>("map").Value;
-                var nowHpointData = hSceneTraverse
-                    .Field<string>("nowHpointData").Value;
-                var closeHpointData = hSceneTraverse
-                    .Field<List<HPointData>>("closeHpointData").Value;
-                var useCategorys = hSceneTraverse
-                    .Field<List<int>>("useCategorys").Value;
+                var lstInitCategory = hSceneTraverse.lstInitCategory;
+                var map = hSceneTraverse.map;
+                var nowHpointData = hSceneTraverse.nowHpointData;
+                var closeHpointData = hSceneTraverse.closeHpointData;
+                var useCategorys = hSceneTraverse.useCategorys;
                 #endregion
 
                 StringBuilder sbTmp = new("HPoint_");
@@ -120,6 +115,8 @@ namespace IDHIPlugins
                         {
                             if (!closeHpointData.Contains(hPointData))
                             {
+                                // Shot to see if added category appears in category move list
+                                //hSceneTraverse.SetCategory(hPointData);
                                 closeHpointData.Add(hPointData);
                             }
                         }
