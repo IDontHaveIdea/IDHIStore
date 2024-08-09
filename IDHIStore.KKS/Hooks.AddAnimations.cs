@@ -20,7 +20,7 @@ namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {
-        internal partial class Hooks
+        internal partial class IDHIStoreItemsHooks
         {
             /// <summary>
             /// Add animations that work on specific H points
@@ -196,17 +196,17 @@ namespace IDHIPlugins
                 // Loop through aibu, houshi and sonyu
                 for (var mode = 0; mode < 3; mode++)
                 {
-                    foreach (var anim in lstAnimInfo[mode].Where(x
+                    foreach (var animation in lstAnimInfo[mode].Where(x
                         => x.lstCategory.Any(c
                             => (c.category == 12)
                                 || (c.category >= 1000 && c.category < 1999))))
                     {
-                        if (anim.lstCategory.Any(c => useCategorys.Contains(c.category)))
+                        if (animation.lstCategory.Any(c => useCategorys.Contains(c.category)))
                         {
                             continue;
                         }
 
-                        var category = anim.lstCategory[0].category;
+                        var category = animation.lstCategory[0].category;
                         switch (category)
                         {
                             case 12:
@@ -238,7 +238,8 @@ namespace IDHIPlugins
                                         }
                                     }
                                 }
-                                /*if (MapHPoints.ContainsKey(map.no)
+                                /*
+                                if (MapHPoints.ContainsKey(map.no)
                                     && MapHPoints[map.no].ContainsKey(category))
                                 {
                                     var vHPoints = MapHPoints[map.no][category];
@@ -257,46 +258,47 @@ namespace IDHIPlugins
                                             }
                                         }
                                     }
-                                }*/
+                                }
+                                */
                                 break;
                             case 1002:
                                 // Bookshelf Caress - Wall Mischievous Caress
 #if DEBUG
-                                anim.nameAnimation = "壁いたずら愛撫";
+                                animation.nameAnimation = "壁いたずら愛撫";
 #else
                                 anim.nameAnimation = "Wall Mischievous Caress";
 #endif
-                                anim.lstCategory.Add(new HSceneProc.Category {
+                                animation.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.Wall,
                                 });
                                 break;
                             case 1006:
-                                if (anim.id == 21)
+                                if (animation.id == 21)
                                 {
                                     // Fence Doggy - Wall Doggy 2
 #if DEBUG
-                                    anim.nameAnimation = "壁バック2";
+                                    animation.nameAnimation = "壁バック2";
 #else
                                     anim.nameAnimation = "Wall Doggy 2";
 #endif
                                 }
-                                if (anim.id == 22)
+                                if (animation.id == 22)
                                 {
                                     // Fence Lifting - Wall Lifting
 #if DEBUG
-                                    anim.nameAnimation = "壁掴まり駅弁";
+                                    animation.nameAnimation = "壁掴まり駅弁";
 #else
                                     anim.nameAnimation = "Wall Lifting";
 #endif
                                 }
-                                anim.lstCategory.Add(new HSceneProc.Category {
+                                animation.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.Wall,
                                 });
                                 break;
 #if DEBUG
                             case 1008:
                                 // Piledriver Missionary
-                                anim.lstCategory.Add(new HSceneProc.Category {
+                                animation.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.SitChair,
                                 });
                                 //anim.lstCategory.Add(new HSceneProc.Category {
@@ -307,7 +309,7 @@ namespace IDHIPlugins
                                 // Straddle Bench Blowjob
                                 // Position has to be rotated for it to work need
                                 // more research
-                                anim.lstCategory.Add(new HSceneProc.Category {
+                                animation.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.BacklessBench,
                                 });
                                 break;
@@ -315,7 +317,7 @@ namespace IDHIPlugins
                                 // Sofa Cowgirl
                                 if (MapHPoints.TryGetValue(map.no, out var hCategory))
                                 {
-                                    anim.lstCategory.Add(new HSceneProc.Category {
+                                    animation.lstCategory.Add(new HSceneProc.Category {
                                         category = (int)PositionCategory.SofaBench,
                                     });
                                 }
@@ -326,11 +328,11 @@ namespace IDHIPlugins
                                 {
                                     // Volleyball Net Doggystyle - Wall Doggy 3
 #if DEBUG
-                                    anim.nameAnimation = "壁バック3";
+                                    animation.nameAnimation = "壁バック3";
 #else
                                     anim.nameAnimation = "Wall Doggy 3";
 #endif
-                                    anim.lstCategory.Add(new HSceneProc.Category
+                                    animation.lstCategory.Add(new HSceneProc.Category
                                     {
                                         category = (int)PositionCategory.Wall,
                                     });
@@ -338,7 +340,7 @@ namespace IDHIPlugins
                                 break;
                             case 1304:
                                 // Pressed From Behind
-                                anim.lstCategory.Add(new HSceneProc.Category {
+                                animation.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.Wall,
                                 });
                                 break;
@@ -349,7 +351,7 @@ namespace IDHIPlugins
                                 {
                                     if (useCategorys.Contains(9))
                                     {
-                                        anim.lstCategory.Add(new HSceneProc.Category {
+                                        animation.lstCategory.Add(new HSceneProc.Category {
                                             category = (int)PositionCategory.StandPool,
                                         });
                                     }

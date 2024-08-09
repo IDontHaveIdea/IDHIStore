@@ -19,10 +19,11 @@ namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {
-        internal partial class Hooks
+        internal partial class IDHIStoreItemsHooks
         {
             /// <summary>
             /// Add animations for special action points like in Free-H
+            /// TODO: Consider distance
             /// </summary>
             /// <param name="__instance"></param>
             [HarmonyPostfix]
@@ -116,7 +117,7 @@ namespace IDHIPlugins
                             if (!closeHpointData.Contains(hPointData))
                             {
                                 // Shot to see if added category appears in category move list
-                                //hSceneTraverse.SetCategory(hPointData);
+                                // hSceneTraverse.SetCategory(hPointData);
                                 closeHpointData.Add(hPointData);
                             }
                         }

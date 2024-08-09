@@ -15,7 +15,7 @@ namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {
-        internal partial class Hooks
+        internal partial class IDHIStoreItemsHooks
         {
             internal enum State { On = 0, Shift = 1, Hang = 2, Off = 3 }
 

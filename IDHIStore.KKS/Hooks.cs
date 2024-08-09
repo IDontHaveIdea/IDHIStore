@@ -12,11 +12,11 @@ namespace IDHIPlugins
     {
         internal static Dictionary<int, Dictionary<int, int>> _dicExpAddTaii = [];
 
-        internal partial class Hooks
+        internal partial class IDHIStoreItemsHooks
         {
             internal static void Init()
             {
-                _ = Harmony.CreateAndPatchAll(typeof(Hooks));
+                _ = Harmony.CreateAndPatchAll(typeof(IDHIStoreItemsHooks));
             }
         }
     }

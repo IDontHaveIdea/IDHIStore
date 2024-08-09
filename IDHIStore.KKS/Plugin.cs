@@ -53,7 +53,7 @@ namespace IDHIPlugins
             {
                 _animationLoaderOK = true;
             }
-            Hooks.Init();
+            IDHIStoreItemsHooks.Init();
         }
         #endregion
     }

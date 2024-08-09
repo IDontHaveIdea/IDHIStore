@@ -13,7 +13,7 @@ namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {
-        internal partial class Hooks
+        internal partial class IDHIStoreItemsHooks
         {
             /// <summary>
             /// Add animations in the range 1010-1099 and 1100-1199 to lstUseAnimInfo
@@ -22,7 +22,7 @@ namespace IDHIPlugins
             [HarmonyPostfix]
             [HarmonyPatch(
                 typeof(HSceneProc), nameof(HSceneProc.CreateListAnimationFileName))]
-            public static void ExtendUseAnimInfoPostfix(
+            public static void ExtendUseAnimationInfoPostfix(
                 object __instance)
             {
                 var hsceneTraverse = Traverse.Create(__instance);

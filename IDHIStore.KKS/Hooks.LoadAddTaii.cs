@@ -11,7 +11,7 @@ namespace IDHIPlugins
 {
     public partial class IDHIStoreItems
     {
-        internal partial class Hooks
+        internal partial class IDHIStoreItemsHooks
         {
             /// <summary>
             /// Systematically clearing items in dicExpAddTaii makes animations available 
