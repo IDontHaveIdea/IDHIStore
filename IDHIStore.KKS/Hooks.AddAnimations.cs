@@ -156,7 +156,7 @@ namespace IDHIPlugins
             /// <summary>
             /// Add some special animations to other maps adjusting categories
             /// Some names were change because of context
-            /// TODO: how to set fingers straight for some animations
+            /// TODO: how to set fingers straight for some animations and consider distance
             /// </summary>
             /// <param name="__instance"></param>
             [HarmonyPostfix]
@@ -172,7 +172,13 @@ namespace IDHIPlugins
                 {
                     return;
                 }
-
+#if DEBUG
+                if (OnlySpecialAnimations.Value)
+                {
+                    _Log.Debug($"[AddToCategoryListPostfix] Normal animations disabled.");
+                    return;
+                }
+#endif
                 if ((categorys[0] == 12) || (categorys[0] >= 1000))
                 {
                     return;
@@ -315,6 +321,7 @@ namespace IDHIPlugins
                                 break;
                             case 1201:
                                 // Sofa Cowgirl
+                                // Does not work well on all SofaBench
                                 if (MapHPoints.TryGetValue(map.no, out var hCategory))
                                 {
                                     animation.lstCategory.Add(new HSceneProc.Category {

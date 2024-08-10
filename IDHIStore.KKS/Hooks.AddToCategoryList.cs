@@ -39,7 +39,13 @@ namespace IDHIPlugins
                     _Log.Debug($"0001: Disabling in Free-H");
                     return;
                 }
-
+#if DEBUG
+                if (OnlySpecialAnimations.Value)
+                {
+                    _Log.Debug($"[AddToCategoryListPostfix] Normal animations disabled.");
+                    return;
+                }
+#endif
                 if ((categorys[0] == 12) || (categorys[0] >= 1000))
                 {
                     _Log.Debug($"0002: Disabling is a special H point.");

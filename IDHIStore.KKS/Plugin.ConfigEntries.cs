@@ -13,6 +13,8 @@ namespace IDHIPlugins
     {
         internal static ConfigEntry<bool> DebugInfo { get; set; }
         internal static ConfigEntry<bool> DebugToConsole { get; set; }
+        internal static ConfigEntry<bool> OnlySpecialAnimations { get; set; }
+
         internal const string DebugSection = "Debug";
 
         internal void ConfigEntries()
@@ -54,8 +56,28 @@ namespace IDHIPlugins
                 _Log.Level(LogLevel.Info, $"[ConfigEntries] Log.DebugToConsole set to " +
                     $"{_Log.DebugToConsole}");
 #endif
-
             };
+#if DEBUG
+            OnlySpecialAnimations = Config.Bind(
+                section: DebugSection,
+                key: "Debug information to Console",
+                defaultValue: false,
+                configDescription: new ConfigDescription(
+                    description: "Show debug information in Console",
+                    acceptableValues: null,
+                    tags: new ConfigurationManagerAttributes {
+                        Order = 1,
+                        IsAdvanced = true
+                    }));
+            OnlySpecialAnimations.SettingChanged += (_sender, _args) =>
+            {
+#if DEBUG
+                _Log.Level(LogLevel.Info, $"[ConfigEntries] OnlySpecialAnimations set to " +
+                    $"{OnlySpecialAnimations.Value}");
+#endif
+            };
+#endif
+
         }
     }
 }
