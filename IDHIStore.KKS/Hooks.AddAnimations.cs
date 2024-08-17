@@ -272,7 +272,7 @@ namespace IDHIPlugins
 #if DEBUG
                                 animation.nameAnimation = "壁いたずら愛撫";
 #else
-                                anim.nameAnimation = "Wall Mischievous Caress";
+                                animation.nameAnimation = "Wall Mischievous Caress";
 #endif
                                 animation.lstCategory.Add(new HSceneProc.Category {
                                     category = (int)PositionCategory.Wall,
@@ -285,7 +285,7 @@ namespace IDHIPlugins
 #if DEBUG
                                     animation.nameAnimation = "壁バック2";
 #else
-                                    anim.nameAnimation = "Wall Doggy 2";
+                                    animation.nameAnimation = "Wall Doggy 2";
 #endif
                                 }
                                 if (animation.id == 22)
@@ -294,7 +294,7 @@ namespace IDHIPlugins
 #if DEBUG
                                     animation.nameAnimation = "壁掴まり駅弁";
 #else
-                                    anim.nameAnimation = "Wall Lifting";
+                                    animation.nameAnimation = "Wall Lifting";
 #endif
                                 }
                                 animation.lstCategory.Add(new HSceneProc.Category {
@@ -337,7 +337,7 @@ namespace IDHIPlugins
 #if DEBUG
                                     animation.nameAnimation = "壁バック3";
 #else
-                                    anim.nameAnimation = "Wall Doggy 3";
+                                    animation.nameAnimation = "Wall Doggy 3";
 #endif
                                     animation.lstCategory.Add(new HSceneProc.Category
                                     {
