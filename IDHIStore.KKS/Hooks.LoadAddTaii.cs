@@ -43,9 +43,20 @@ namespace IDHIPlugins
                 {
                     return;
                 }
-
                 var _hLevel = Store.GetHLevel();
-
+#if DEBUG
+                // Bypass store in debug mode
+                if (!NoExperience.Value)
+                {
+                    _Log.Debug("[LoadAddTaiiPostfix] No Experience for animations disabled.");
+                    return;
+                }
+                if (!StoreLogic.Value)
+                {
+                    _Log.Debug("[LoadAddTaiiPostfix] No Experience for animations enabled.");
+                    _hLevel = 3;
+                }
+#endif
                 if (_hLevel <= 0)
                 {
                     _Log.Debug("0005: No levels bought yet.");
@@ -56,7 +67,6 @@ namespace IDHIPlugins
                 {
                     _Log.Debug($"0006: Level {_hLevel} enabled.");
                 }
-
                 var modes = new List<int>(dicExpAddTaii.Keys);
                 foreach (var mode in modes)
                 {

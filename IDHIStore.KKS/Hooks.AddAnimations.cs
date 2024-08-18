@@ -172,20 +172,25 @@ namespace IDHIPlugins
                 {
                     return;
                 }
-#if DEBUG
-                if (OnlySpecialAnimations.Value)
-                {
-                    _Log.Debug($"[AddToCategoryListPostfix] Normal animations disabled.");
-                    return;
-                }
-#endif
                 if ((categorys[0] == 12) || (categorys[0] >= 1000))
                 {
                     return;
                 }
-
                 var _hLevel = Store.GetHLevel();
-
+#if DEBUG
+                if (!AdditionalCategories.Value)
+                {
+                    _Log.Debug($"[AddToCategoryListPostfix] Additional Categories for Special " +
+                        "Animations disabled.");
+                    return;
+                }
+                if (!StoreLogic.Value)
+                {
+                    _Log.Debug($"[AddToCategoryListPostfix] Additional Categories for Special " +
+                            "Animations enabled.");
+                    _hLevel = 3;
+                }
+#endif
                 if (_hLevel < 3)
                 {
                     return;

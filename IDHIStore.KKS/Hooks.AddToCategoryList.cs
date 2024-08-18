@@ -39,24 +39,28 @@ namespace IDHIPlugins
                     _Log.Debug($"0001: Disabling in Free-H");
                     return;
                 }
-#if DEBUG
-                if (OnlySpecialAnimations.Value)
-                {
-                    _Log.Debug($"[AddToCategoryListPostfix] Normal animations disabled.");
-                    return;
-                }
-#endif
                 if ((categorys[0] == 12) || (categorys[0] >= 1000))
                 {
                     _Log.Debug($"0002: Disabling is a special H point.");
                     return;
                 }
-
                 var _hLevel = Store.GetHLevel();
-
+#if DEBUG
+                // Bypass Store
+                if (!SpecialAnimations.Value)
+                {
+                    _Log.Debug($"[AddToCategoryListPostfix] Special animations disabled.");
+                    return;
+                }
+                if (!StoreLogic.Value)
+                {
+                    _Log.Debug($"[AddToCategoryListPostfix] Special animations enabled.");
+                    _hLevel = 3;
+                }
+#endif
                 if (_hLevel > 2)
                 {
-                    _Log.Debug($"0003: Level 3 enabled.");
+                    _Log.Debug($"[AddToCategoryListPostfix] Level 3 enabled.");
                 }
                 else
                 {

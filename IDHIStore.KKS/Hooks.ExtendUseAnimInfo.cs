@@ -36,7 +36,19 @@ namespace IDHIPlugins
                 }
 
                 var _hLevel = Store.GetHLevel();
-
+#if DEBUG
+                // Bypass Store
+                if (!SpecialAnimations.Value)
+                {
+                    _Log.Debug($"[ExtendUseAnimationInfoPostfix] Special animations disabled.");
+                    return;
+                }
+                if (!StoreLogic.Value)
+                {
+                    _Log.Debug($"[ExtendUseAnimationInfoPostfix] Special animations enabled.");
+                    _hLevel = 3;
+                }
+#endif
                 if (_hLevel < 3)
                 {
                     return;
