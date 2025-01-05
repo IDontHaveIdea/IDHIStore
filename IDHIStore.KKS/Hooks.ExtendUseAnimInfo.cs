@@ -1,12 +1,13 @@
 ﻿//
 // Hooks for Store - Add special animations to lstUseAnimInfo
 //
-// Ignore Spelling: Anim
 
 using System.Collections.Generic;
 using System.Linq;
 
 using HarmonyLib;
+
+using IDHIUtils;
 
 
 namespace IDHIPlugins
@@ -17,17 +18,18 @@ namespace IDHIPlugins
         {
             /// <summary>
             /// Add animations in the range 1010-1099 and 1100-1199 to lstUseAnimInfo
+            /// NON NEEDED INCORRECT LOGIC
             /// </summary>
             /// <param name="__instance">HSceneProc instance</param>
-            [HarmonyPostfix]
-            [HarmonyPatch(
-                typeof(HSceneProc), nameof(HSceneProc.CreateListAnimationFileName))]
+            //[HarmonyPostfix]
+            //[HarmonyPatch(
+            //    typeof(HSceneProc), nameof(HSceneProc.CreateListAnimationFileName))]
             public static void ExtendUseAnimationInfoPostfix(
                 object __instance)
             {
-                var hsceneTraverse = Traverse.Create(__instance);
+                var hSceneTraverse = Traverse.Create(__instance);
 
-                var flags = hsceneTraverse
+                var flags = hSceneTraverse
                     .Field<HFlag>("flags").Value;
 
                 if (flags.isFreeH)
@@ -57,11 +59,11 @@ namespace IDHIPlugins
                 var lstUseAnimInfo = Traverse
                     .Create(__instance)
                     .Field<List<HSceneProc.AnimationListInfo>[]>("lstUseAnimInfo").Value;
-                var lstAnimInfo = hsceneTraverse
+                var lstAnimInfo = hSceneTraverse
                     .Field<List<HSceneProc.AnimationListInfo>[]>("lstAnimInfo").Value;
-                var categorys = hsceneTraverse
+                var categorys = hSceneTraverse
                     .Field<List<int>>("categorys").Value;
-                var useCategorys = hsceneTraverse
+                var useCategorys = hSceneTraverse
                     .Field<List<int>>("useCategorys").Value;
 
                 // Test for range 1010-1099 and 1100-1199
