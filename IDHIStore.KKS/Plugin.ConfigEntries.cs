@@ -60,9 +60,8 @@ namespace IDHIPlugins
                     $"{_Log.DebugToConsole}");
 #endif
             };
+            section = "Options";
 #if DEBUG
-            section = "Configuration";
-
             NoExperience = Config.Bind(
                 section: section,
                 key: "No Experience to Unlock Animations",
@@ -81,7 +80,6 @@ namespace IDHIPlugins
 #endif
             };
 #endif
-            section = "Configuration";
 #if DEBUG
             AdditionalCategories = Config.Bind(
                 section: section,
