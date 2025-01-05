@@ -2,18 +2,16 @@
 // Hooks for Store - Add special animations categories to useCategorys
 //
 
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ActionGame;
+using UnityEngine;
 using H;
 
 using HarmonyLib;
 
-using UnityEngine;
-
 using IDHIUtils;
+
 
 namespace IDHIPlugins
 {
@@ -22,7 +20,7 @@ namespace IDHIPlugins
         internal partial class IDHIStoreItemsHooks
         {
             /// <summary>
-            /// Add animations for special action points like in Free-H
+            /// Add H points special animations action points like in Free-H
             /// TODO: Consider distance
             /// </summary>
             /// <param name="__instance"></param>
@@ -128,6 +126,9 @@ namespace IDHIPlugins
                             {
                                 // Shot to see if added category appears in category move list
                                 // hSceneTraverse.SetCategory(hPointData);
+#if DEBUG
+                                _Log.Debug($"[AddToCategoryListPostfix] HPoint={hPointData.name} category={category}");
+#endif
                                 closeHpointData.Add(hPointData);
                             }
                         }
