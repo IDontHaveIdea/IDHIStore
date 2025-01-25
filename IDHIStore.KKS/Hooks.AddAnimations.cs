@@ -178,7 +178,7 @@ namespace IDHIPlugins
                 }
                 var _hLevel = Store.GetHLevel();
 #if DEBUG
-                if (!AdditionalCategories.Value)
+                if (!AdditionalCategories.Value && !SpecialAnimations.Value)
                 {
                     _Log.Debug($"[AddToCategoryListPostfix] Additional Categories for Special " +
                         "Animations disabled.");
