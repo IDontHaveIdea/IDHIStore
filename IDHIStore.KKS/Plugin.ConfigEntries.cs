@@ -113,10 +113,8 @@ namespace IDHIPlugins
                     }));
             SpecialAnimations.SettingChanged += (_sender, _args) =>
             {
-#if DEBUG
                 _Log.Level(LogLevel.Info, $"[ConfigEntries] OnlySpecialAnimations set to " +
                     $"{SpecialAnimations.Value}");
-#endif
             };
 #endif
 #if DEBUG
