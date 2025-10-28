@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\BuildSettings.Common.props" />
-  <Import Project="..\BuildSettings.KoikatsuSunshine.props" />
+  <Import Project="$(SolutionDir)BuildSettings.Common.props" />
+  <Import Project="$(SolutionDir)BuildSettings.KoikatsuSunshine.props" />
 
   <PropertyGroup>
     <ProjectGuid>dc735533-276c-41b7-a882-77210c45cff1</ProjectGuid>
     <RootNamespace>IDHIPlugins</RootNamespace>
-    <AssemblyName>KKS_$(MSBuildProjectName.Replace(".KKS", ""))</AssemblyName>
-    <Nullable>warnings</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -51,7 +49,7 @@
 
   <ItemGroup>
     <Reference Include="KKS_IDHIUtils">
-      <HintPath>..\..\..\lib\KKS\KKS_IDHIUtils.dll</HintPath>
+      <HintPath>$(SolutionDir)lib\KKS\KKS_IDHIUtils.dll</HintPath>
     </Reference>
   </ItemGroup>
 
